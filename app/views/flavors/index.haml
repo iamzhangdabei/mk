@@ -1,0 +1,18 @@
+%h1 Listing flavors
+%table
+  %tr
+    %th id
+    %th name
+    %th vcpus
+    %th memory
+    %th root disk
+    %th ephemeral disk
+  - @flavors.each do |flavor|
+    %tr
+      %td= flavor[:id]
+      %td= flavor[:name]
+      %td= flavor[:vcpus]
+      %td= flavor[:disk]
+      %td= flavor["OS-FLV-EXT-DATA:ephemeral"]
+%br/
+= link_to 'New Flavor', new_flavor_path
