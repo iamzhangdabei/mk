@@ -52,6 +52,8 @@ module Compute
         connection.services_status = resp_data['access']['serviceCatalog']
         if connection.keystone
            @uri = URI.parse(resp_data['access']['serviceCatalog'].select{|c| c["type"]=="identity"}[0]["endpoints"][0]["adminURL"])
+        elsif connection.glance
+          @uri = URI.parse(resp_data['access']['serviceCatalog'].select{|c| c["type"]=="image"}[0]["endpoints"][0]["publicURL"])
         else
           resp_data['access']['serviceCatalog'].each do |service|
             if connection.service_name

@@ -1,0 +1,17 @@
+%h1 Listing images
+%table
+  %tr
+    %th Name
+    %th Status
+    %th Public
+    %th Container Format
+  - @images.each do |image|
+    -image.each_pair do |key,value|
+      ="#{key} is #{value}"
+    %tr
+      %td= image[:name]
+      %td= image[:status]
+      %td= (image[:is_public] == true && "Yes")||"No"
+      %td= image[:container_format]
+%br/
+= link_to 'New Image', new_image_path

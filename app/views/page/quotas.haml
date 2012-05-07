@@ -1,0 +1,4 @@
+%h1 Listing quotas
+- @quotas[:quota_set].each_pair do |key,value|
+  ="#{key} is #{value}"
+  %br

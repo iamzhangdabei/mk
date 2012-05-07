@@ -51,13 +51,15 @@
                 %input{:type => "submit", :value => "查找帖子"}/
             %h5 关键字过滤
             %ul.menu
-            %h5 用户管理
+            %h5 管理
             %ul.menu
-              %li= link_to '用户列表', admin_users_path
-              %li
-                %a{:href => "/admin/users"} 网友审核团队列表
-              %li
-                %a{:href => "/admin/delete_avatar"} 删除头像
+              %li= link_to 'users', users_path
+              %li= link_to 'tenants', tenants_path
+              %li= link_to 'servers', servers_path
+              %li= link_to 'flavors', flavors_path
+              %li= link_to 'images', images_path
+              %li= link_to 'quotas', "/page/quotas"
+              %li= link_to 'services', "/page/services"
 
       / right
       %br{:style => "clear: both;"}

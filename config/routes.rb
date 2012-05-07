@@ -1,4 +1,7 @@
 Mk::Application.routes.draw do
+  match "page/:action" => "page"
+  resources :tenants
+
   resources :flavors
 
   resources :images

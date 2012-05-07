@@ -2,7 +2,7 @@ class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
   def index
-    @images = current_connection.list_images
+    @images = glance.list_images
 
     respond_to do |format|
       format.html # index.html.erb

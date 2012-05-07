@@ -1,4 +1,12 @@
 class UsersController < ApplicationController
+  def index
+    @users = current_admin_connection.tenants
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render :json => @tenants }
+    end
+  end
   def new
     @user = User.new
   end

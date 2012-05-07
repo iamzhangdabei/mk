@@ -22,6 +22,7 @@ module OpenStack
       attr_reader   :proxy_port
       attr_reader   :region
       attr_accessor :keystone
+      attr_accessor :glance
       attr_accessor :services_status
       
       # Creates a new OpenStack::Compute::Connection object.  Uses OpenStack::Compute::Authentication to perform the login for the connection.
@@ -51,7 +52,7 @@ module OpenStack
         @region = options[:region] || @region = nil
         @is_debug = options[:is_debug]
         @keystone = options[:keystone] || false
-
+        @glance = options[:glance] || false
         auth_uri=nil
         begin
           auth_uri=URI.parse(@auth_url)
@@ -125,8 +126,8 @@ module OpenStack
         return res
       end
 
-      def quotas
-        response = req("get","/os-quota-sets/#{current_tenant[:id]}")
+      def quotas(admin_connection)
+        response = req("get","/os-quota-sets/#{admin_connection.current_tenant[:id]}")
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body))
       end
