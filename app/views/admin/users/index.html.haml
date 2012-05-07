@@ -1,0 +1,14 @@
+%table.table.table-bordered.table-striped#tenant_usage
+  %thead
+    %tr
+      %th
+        login
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td
+          =user.login
+  %tfoot
+    %tr
+      %td
+        Displaying 1 item</span>

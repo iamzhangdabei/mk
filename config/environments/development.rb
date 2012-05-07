@@ -1,0 +1,39 @@
+Mk::Application.configure do
+  # Settings specified here will take precedence over those in config/application.rb
+
+  # In the development environment your application's code is reloaded on
+  # every request.  This slows down response time but is perfect for development
+  # since you don't have to restart the webserver when you make code changes.
+
+  config.cache_classes = false
+  # Log error messages when you accidentally call methods on nil.
+  config.whiny_nils = true
+  config.assets.logger = nil
+  # Show full error reports and disable caching
+  config.consider_all_requests_local       = true
+  config.action_controller.perform_caching = true
+  # Don't care if the mailer can't send
+  config.action_mailer.default_url_options = { :host => "example.com", :only_path => false }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :test
+  #config.sass.debug_info = true
+  #config.sass.quiet = false
+  # Print deprecation notices to the Rails logger
+  config.active_support.deprecation = :log
+
+  # Only use best-standards-support built into browsers
+  config.action_dispatch.best_standards_support = :builtin
+  # Do not compress assets
+  config.assets.compress = false
+  config.assets.compile = true
+  #config.serve_static_assets = true
+  #config.assets.digest = false
+  # Expands the lines which load the assets
+  config.assets.debug = true
+  config.assets.prefix = '/assets'
+  config.cache_store = :memory_store
+  #config.session_store :mem_cache_store
+  #config.cache_store = :dalli_store, '127.0.0.1' #,{ :compression => true}
+  #config.session_store :mem_cache_store#, 'localhost', :expires_after => 12.hours
+  # Raise exception on mass assignment protection for Active Record models
+end

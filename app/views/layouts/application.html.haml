@@ -1,0 +1,71 @@
+!!! 5
+-# http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
+-ie_html :class => 'no-js' do
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
+      %title
+        = yield :title
+        = @title_name
+        |
+        超管平台
+      = stylesheet_link_tag "admin.css", :media =>"screen"
+      = stylesheet_link_tag "/stylesheets/jquery.autocomplete.css", :media =>"screen"
+      = csrf_meta_tags
+  %body{ :lang => 'en', :class => [body_class_names, 'two-col'] }
+    #header
+      #nav
+        #loginbar
+          - if logged_in? and not params[:action] == "login"
+            您好，
+            = current_user.login
+            |
+            = link_to("退出", logout_path)
+          - else
+            您好，您可以
+            = link_to("登录", login_path )
+            或
+            = link_to("注册", signup_path )
+      %h1 超管平台
+    / end header
+    #container
+      #content
+        = yield
+      / content
+      #right
+        -if logged_in? 
+          #right-title 管理功能
+          %ul.menu
+            %li.groups
+              %form{:action => "/admin/groups"}
+                %input{:name => "search", :size => "6"}/
+                %input{:type => "submit", :value => "查找小组"}/
+              %ul.group-filter
+                %li= link_to '所有', "/"
+            %li
+              %a{:href => "/admin/statistic/stats"} 查看统计信息
+            %li
+              %form{:action => "/admin/articles"}
+                %input{:name => "status", :type => "hidden", :value => "all"}/
+                \#
+                %input{:name => "id", :size => "6"}/
+                %input{:type => "submit", :value => "查找帖子"}/
+            %h5 关键字过滤
+            %ul.menu
+            %h5 用户管理
+            %ul.menu
+              %li= link_to '用户列表', admin_users_path
+              %li
+                %a{:href => "/admin/users"} 网友审核团队列表
+              %li
+                %a{:href => "/admin/delete_avatar"} 删除头像
+
+      / right
+      %br{:style => "clear: both;"}
+    / container
+    #footer
+      ©2007-2010
+      %a{:href => "http://bling0.com/"}
+    = javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'
+    = javascript_include_tag "/javascripts/admin"
+    = javascript_include_tag 'plugins'
+

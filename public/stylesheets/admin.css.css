@@ -1,0 +1,752 @@
+/* line 1, ../../app/assets/stylesheets/admin.css.sass */
+body {
+  background: #434343 none repeat scroll 0 0;
+  font-family: Tahoma, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 7, ../../app/assets/stylesheets/admin.css.sass */
+a {
+  color: #ffe14f;
+}
+
+/* line 10, ../../app/assets/stylesheets/admin.css.sass */
+#container {
+  margin: 0 auto;
+  min-width: 760px;
+  width: 92%;
+  zoom: 1;
+  clear: both;
+}
+
+/* line 17, ../../app/assets/stylesheets/admin.css.sass */
+#content {
+  background: #e8e7e3 none repeat scroll 0 0;
+  border-color: #393636;
+  border-style: solid;
+  border-width: 0 5px 5px 0;
+  float: left;
+  margin: 1em 0;
+  min-height: 165px;
+  min-width: 425px;
+  padding: 25px;
+  width: 70%;
+}
+
+/* line 29, ../../app/assets/stylesheets/admin.css.sass */
+#right {
+  color: white;
+  float: left;
+  margin-right: 0;
+  margin-top: 1em;
+  width: 19%;
+}
+/* line 35, ../../app/assets/stylesheets/admin.css.sass */
+#right p, #right li {
+  line-height: 160%;
+}
+/* line 38, ../../app/assets/stylesheets/admin.css.sass */
+#right a.hidden {
+  border-bottom: 1px solid #999999;
+  color: black;
+  text-decoration: none;
+}
+/* line 42, ../../app/assets/stylesheets/admin.css.sass */
+#right a.hidden:hover {
+  border-bottom: 1px solid #996633;
+  color: blue;
+  text-decoration: none;
+}
+/* line 46, ../../app/assets/stylesheets/admin.css.sass */
+#right p.help {
+  font-size: 0.75em;
+  font-weight: normal;
+}
+/* line 49, ../../app/assets/stylesheets/admin.css.sass */
+#right ul, #right li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 53, ../../app/assets/stylesheets/admin.css.sass */
+#footer {
+  color: white;
+  font-size: 0.75em;
+  margin: 0 auto 3.5em 3%;
+  min-width: 545px;
+  padding: 0 15px;
+  width: 67%;
+}
+
+/* line 62, ../../app/assets/stylesheets/admin.css.sass */
+#content form {
+  margin-bottom: 0;
+  float: left;
+}
+/* line 65, ../../app/assets/stylesheets/admin.css.sass */
+#content p.subtle {
+  float: right;
+  margin: 0 0 0.5em;
+}
+/* line 68, ../../app/assets/stylesheets/admin.css.sass */
+#content .subtle a {
+  color: #999999;
+  font-size: 0.7em;
+}
+
+/* line 72, ../../app/assets/stylesheets/admin.css.sass */
+#header {
+  background: #111111 none repeat scroll 0 0;
+  border-bottom: 3px solid #393636;
+  padding: 10px 4%;
+}
+
+/* line 77, ../../app/assets/stylesheets/admin.css.sass */
+#search_box {
+  font-size: 0.7em;
+}
+
+/* line 80, ../../app/assets/stylesheets/admin.css.sass */
+img {
+  border-width: 0;
+}
+
+/* line 83, ../../app/assets/stylesheets/admin.css.sass */
+p.pages {
+  font-size: 0.85em;
+  margin-top: 1.2em;
+}
+
+/* line 87, ../../app/assets/stylesheets/admin.css.sass */
+span.pipe {
+  color: #999999;
+  margin: 0 0.15em;
+}
+
+/* line 91, ../../app/assets/stylesheets/admin.css.sass */
+div.news {
+  background: #ccffcc none repeat scroll 0 0;
+  font-size: 0.7em;
+  font-weight: bold;
+  margin: 1em auto 0;
+  padding: 7px 15px;
+  text-align: center;
+  width: 40em;
+}
+/* line 99, ../../app/assets/stylesheets/admin.css.sass */
+div.news p {
+  margin: 0;
+}
+
+/* line 103, ../../app/assets/stylesheets/admin.css.sass */
+p.notice, p.sections {
+  background: #ddff99 none repeat scroll 0 0;
+  border: 1px solid #bbdd77;
+  font-size: 0.8em;
+  margin-top: 0;
+  padding: 7px 15px;
+}
+/* line 109, ../../app/assets/stylesheets/admin.css.sass */
+p.error {
+  background: #cc0000 none repeat scroll 0 0;
+  color: white;
+}
+/* line 112, ../../app/assets/stylesheets/admin.css.sass */
+p.sections a.action {
+  color: #cc0000;
+}
+
+/* line 115, ../../app/assets/stylesheets/admin.css.sass */
+.hasfile {
+  color: #009900;
+  font-weight: bold;
+  margin-left: 10em;
+}
+
+/* line 120, ../../app/assets/stylesheets/admin.css.sass */
+h1 {
+  font-size: 24px;
+}
+/* line 122, ../../app/assets/stylesheets/admin.css.sass */
+h1 img {
+  vertical-align: middle;
+}
+
+/* line 125, ../../app/assets/stylesheets/admin.css.sass */
+p.subtitle {
+  color: #888888;
+  font-size: 0.75em;
+  font-weight: bold;
+  margin-top: -0.8em;
+}
+/* line 130, ../../app/assets/stylesheets/admin.css.sass */
+p.subtitle img {
+  vertical-align: bottom;
+}
+
+/* line 133, ../../app/assets/stylesheets/admin.css.sass */
+h1 span {
+  color: #999999;
+  font-size: 0.7em;
+  font-weight: normal;
+  padding-left: 1em;
+}
+
+/* line 139, ../../app/assets/stylesheets/admin.css.sass */
+h2 {
+  font-size: 1em;
+}
+/* line 141, ../../app/assets/stylesheets/admin.css.sass */
+h2 span {
+  color: #999999;
+  font-size: 0.7em;
+  margin-left: 1em;
+}
+
+/* line 146, ../../app/assets/stylesheets/admin.css.sass */
+h3 {
+  background: #333333 none repeat scroll 0 0;
+  border-bottom: 1px solid #999999;
+  color: white;
+  font-size: 0.7em;
+  padding: 2px 10px 3px;
+}
+
+/* line 153, ../../app/assets/stylesheets/admin.css.sass */
+h6 {
+  margin-bottom: 0;
+}
+
+/* line 156, ../../app/assets/stylesheets/admin.css.sass */
+pre.explain {
+  background: #e7e7e7 none repeat scroll 0 0;
+  border: 1px solid #cccccc;
+  margin: 0 2em;
+  padding: 7px 15px;
+}
+
+/* line 162, ../../app/assets/stylesheets/admin.css.sass */
+hr {
+  border-color: -moz-use-text-color -moz-use-text-color #cccccc;
+  border-style: none none solid;
+  border-width: 0 0 1px;
+  height: 0;
+  margin: 1em 0;
+}
+
+/* line 169, ../../app/assets/stylesheets/admin.css.sass */
+#right hr {
+  border-color: #bbbbbb;
+}
+
+/* line 172, ../../app/assets/stylesheets/admin.css.sass */
+#monitor_topic {
+  font-size: 12px;
+}
+/* line 174, ../../app/assets/stylesheets/admin.css.sass */
+#monitor_topic .icon {
+  background-image: none;
+}
+
+/* line 177, ../../app/assets/stylesheets/admin.css.sass */
+#footer p {
+  margin: 0;
+}
+/* line 179, ../../app/assets/stylesheets/admin.css.sass */
+#footer p.credit {
+  float: right;
+  text-align: right;
+}
+/* line 182, ../../app/assets/stylesheets/admin.css.sass */
+#footer p.credit a.subtle {
+  color: #333333;
+}
+/* line 184, ../../app/assets/stylesheets/admin.css.sass */
+#footer p.legal {
+  float: left;
+  margin-right: 1.5em;
+}
+/* line 187, ../../app/assets/stylesheets/admin.css.sass */
+#footer p.disclaim {
+  color: #008800;
+  float: left;
+}
+
+/* line 191, ../../app/assets/stylesheets/admin.css.sass */
+div.asset {
+  background: #e7e7e7 none repeat scroll 0 0;
+  border-bottom: 1px solid #cccccc;
+  font-size: 0.8em;
+  margin-bottom: 1em;
+  padding: 7px 15px;
+  text-align: center;
+}
+
+/* line 199, ../../app/assets/stylesheets/admin.css.sass */
+input.submit {
+  float: right;
+  margin-right: 1em;
+}
+
+/* line 204, ../../app/assets/stylesheets/admin.css.sass */
+#header img {
+  margin-right: 0.25em;
+  vertical-align: bottom;
+}
+/* line 207, ../../app/assets/stylesheets/admin.css.sass */
+#header h1 {
+  border: 0 none;
+  color: white;
+  font-weight: normal;
+  margin: 0;
+  text-decoration: none;
+}
+/* line 213, ../../app/assets/stylesheets/admin.css.sass */
+#header h1 a {
+  border: 0 none;
+  color: white;
+  font-weight: normal;
+  margin: 0;
+  text-decoration: none;
+}
+/* line 219, ../../app/assets/stylesheets/admin.css.sass */
+#header h1 .count {
+  color: #dddddd;
+  font-size: 0.6em;
+  font-weight: normal;
+  padding-left: 1em;
+}
+/* line 224, ../../app/assets/stylesheets/admin.css.sass */
+#header #nav {
+  color: white;
+  float: right;
+  font-size: 12px;
+  list-style-type: none;
+  margin: 0.4em 0 0;
+}
+/* line 230, ../../app/assets/stylesheets/admin.css.sass */
+#header #nav a {
+  color: white;
+}
+
+/* line 233, ../../app/assets/stylesheets/admin.css.sass */
+.entry_bar {
+  background-color: #cccccc;
+  border-bottom: 1px solid #888888;
+  clear: both;
+  display: block;
+  height: 31px;
+  line-height: 29px;
+  margin-bottom: 6px;
+  margin-top: 15px;
+  padding-left: 8px;
+  padding-right: 8px;
+  position: relative;
+}
+
+/* line 246, ../../app/assets/stylesheets/admin.css.sass */
+.entry_bar_left {
+  float: left;
+}
+
+/* line 249, ../../app/assets/stylesheets/admin.css.sass */
+.entry_bar a {
+  color: #6b78a9;
+}
+
+/* line 252, ../../app/assets/stylesheets/admin.css.sass */
+.entry_bar_right {
+  float: right;
+}
+
+/* line 255, ../../app/assets/stylesheets/admin.css.sass */
+.content {
+  clear: both;
+  font-size: 14px;
+  margin-bottom: 30px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/* line 262, ../../app/assets/stylesheets/admin.css.sass */
+#pagenation {
+  -x-system-font: none;
+  font-size: 12px;
+  font-size-adjust: none;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: normal;
+  padding-top: 20px;
+  text-align: center;
+}
+
+/* line 274, ../../app/assets/stylesheets/admin.css.sass */
+#pagenation_submit {
+  display: none;
+}
+
+/* line 277, ../../app/assets/stylesheets/admin.css.sass */
+#page_cur {
+  -x-system-font: none;
+  border: 1px solid #595959;
+  color: #333333;
+  font-size: 12px;
+  font-size-adjust: none;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: normal;
+  text-align: center;
+}
+
+/* line 290, ../../app/assets/stylesheets/admin.css.sass */
+.xx {
+  background-color: #ffff99;
+}
+
+/* line 293, ../../app/assets/stylesheets/admin.css.sass */
+.entity_ref {
+  background-color: #33ffff;
+  border-bottom: 2px solid #3399ff;
+  margin-bottom: 6px;
+}
+
+/* line 298, ../../app/assets/stylesheets/admin.css.sass */
+.entity_refhead {
+  font-weight: bold;
+}
+
+/* line 301, ../../app/assets/stylesheets/admin.css.sass */
+.comment_answer {
+  background-color: #ffffca;
+  margin: 10px 0;
+}
+
+/* line 305, ../../app/assets/stylesheets/admin.css.sass */
+.check_comment {
+  color: #1a06bf;
+}
+/* line 307, ../../app/assets/stylesheets/admin.css.sass */
+.check_comment a {
+  color: #1a06bf;
+}
+
+/* line 310, ../../app/assets/stylesheets/admin.css.sass */
+.normal_comment {
+  background-color: #d8edfa;
+  margin: 10px 0;
+}
+
+/* line 314, ../../app/assets/stylesheets/admin.css.sass */
+#nav88 {
+  margin: 0;
+  padding: 0 0 29px 0;
+  border-bottom: 1px solid #9fb1bc;
+}
+/* line 318, ../../app/assets/stylesheets/admin.css.sass */
+#nav88 li {
+  margin: 0;
+  padding: 0;
+  display: inline;
+  list-style-type: none;
+}
+/* line 324, ../../app/assets/stylesheets/admin.css.sass */
+#nav88 a:link, #nav88 a:visited {
+  float: left;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: bold;
+  padding: 0 0 6px 0;
+  margin-right: 28px;
+  text-decoration: none;
+  color: #708491;
+}
+/* line 333, ../../app/assets/stylesheets/admin.css.sass */
+#nav88 a:link.current, #nav88 a:visited.current, #nav88 a:hover {
+  color: black;
+  background: url(rounded.gif) no-repeat bottom center;
+}
+
+/* line 337, ../../app/assets/stylesheets/admin.css.sass */
+#right-title {
+  width: 100%;
+  background-color: #e8e7e3;
+  color: black;
+  border: 1px solid #393636;
+  padding: 5px;
+  font-weight: bold;
+}
+
+/* line 345, ../../app/assets/stylesheets/admin.css.sass */
+.tag {
+  color: #006600;
+  padding-top: 8px;
+}
+/* line 348, ../../app/assets/stylesheets/admin.css.sass */
+.tag span {
+  color: #009966;
+}
+
+/* line 351, ../../app/assets/stylesheets/admin.css.sass */
+.left a, .entity_text a {
+  color: black;
+}
+
+/* line 354, ../../app/assets/stylesheets/admin.css.sass */
+.pagination {
+  padding-top: 20px;
+}
+/* line 356, ../../app/assets/stylesheets/admin.css.sass */
+.pagination a {
+  color: black;
+}
+
+/* line 359, ../../app/assets/stylesheets/admin.css.sass */
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/* line 363, ../../app/assets/stylesheets/admin.css.sass */
+.list li {
+  margin: 15px 0 0px 0;
+  padding: 0 0 0 0;
+  border-bottom: #eeeeee solid 1px;
+}
+/* line 367, ../../app/assets/stylesheets/admin.css.sass */
+.list li .left {
+  display: block;
+  float: left;
+  position: relative;
+  margin: 0 -110px 0 0;
+}
+/* line 372, ../../app/assets/stylesheets/admin.css.sass */
+.list li .right {
+  display: block;
+  float: left;
+  padding: 0 0 0 120px;
+}
+
+/* line 377, ../../app/assets/stylesheets/admin.css.sass */
+.clear {
+  display: block;
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+/* line 383, ../../app/assets/stylesheets/admin.css.sass */
+#content a {
+  color: red;
+}
+/* line 385, ../../app/assets/stylesheets/admin.css.sass */
+#content a:hover {
+  color: lime;
+}
+
+/* line 390, ../../app/assets/stylesheets/admin.css.sass */
+.status-edit {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+/* line 394, ../../app/assets/stylesheets/admin.css.sass */
+.status-edit li {
+  list-style: none;
+  display: inline;
+}
+/* line 397, ../../app/assets/stylesheets/admin.css.sass */
+.status-edit li.active {
+  color: white;
+  background-color: green;
+}
+
+/* line 402, ../../app/assets/stylesheets/admin.css.sass */
+.article .created_at {
+  color: #666666;
+  font-size: 12px;
+}
+
+/* line 406, ../../app/assets/stylesheets/admin.css.sass */
+.group-list {
+  clear: both;
+  margin: 0;
+  height: 200px;
+  overflow: scroll;
+}
+/* line 411, ../../app/assets/stylesheets/admin.css.sass */
+.group-list li {
+  list-style: none;
+}
+/* line 413, ../../app/assets/stylesheets/admin.css.sass */
+.group-list li.current {
+  font-weight: bold;
+}
+
+/* line 416, ../../app/assets/stylesheets/admin.css.sass */
+ul.menu {
+  margin: 0;
+  padding: 0;
+}
+/* line 419, ../../app/assets/stylesheets/admin.css.sass */
+ul.menu li {
+  list-style: none;
+}
+/* line 422, ../../app/assets/stylesheets/admin.css.sass */
+ul.menu .group-filter li {
+  float: left;
+  margin-right: 1em;
+}
+
+/* line 429, ../../app/assets/stylesheets/admin.css.sass */
+.comment.anonymous .user {
+  background: transparent;
+}
+/* line 431, ../../app/assets/stylesheets/admin.css.sass */
+.comment .user {
+  background: yellow;
+}
+
+/* line 434, ../../app/assets/stylesheets/admin.css.sass */
+ul.tab {
+  margin: 10px 0;
+  padding: 10px 0;
+  border-bottom: 1px solid black;
+  overflow: hidden;
+  *zoom: 1;
+}
+/* line 439, ../../app/assets/stylesheets/admin.css.sass */
+ul.tab li {
+  list-style: none;
+  float: left;
+  margin-right: 10px;
+}
+
+/* line 446, ../../app/assets/stylesheets/admin.css.sass */
+.formtastic ol {
+  margin: 0;
+  padding: 0;
+}
+/* line 449, ../../app/assets/stylesheets/admin.css.sass */
+.formtastic ol li {
+  list-style: none;
+}
+/* line 451, ../../app/assets/stylesheets/admin.css.sass */
+.formtastic ol li label {
+  display: block;
+}
+/* line 454, ../../app/assets/stylesheets/admin.css.sass */
+.formtastic ol li.datetime ol li {
+  float: left;
+}
+/* line 456, ../../app/assets/stylesheets/admin.css.sass */
+.formtastic ol li.datetime ol li label {
+  display: none;
+}
+/* line 458, ../../app/assets/stylesheets/admin.css.sass */
+.formtastic ol li textarea {
+  width: 90%;
+}
+
+/* line 463, ../../app/assets/stylesheets/admin.css.sass */
+#message, .flash {
+  padding: 8px 8px 8px 30px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+/* line 468, ../../app/assets/stylesheets/admin.css.sass */
+.flash_notice, .flash_message {
+  border: 1px solid #00a017;
+  color: #00a017;
+  background: 7px 7px no-repeat url("/images/admin/icons/accept.png") #e0f5e0;
+}
+
+/* line 473, ../../app/assets/stylesheets/admin.css.sass */
+.flash_notice {
+  color: #00a017;
+}
+/* line 475, ../../app/assets/stylesheets/admin.css.sass */
+.flash_notice * {
+  color: #00a017;
+}
+
+/* line 478, ../../app/assets/stylesheets/admin.css.sass */
+.flash_error, .flash_alert {
+  border: 1px solid #a00027;
+  color: #a00027;
+  background: 7px 7px no-repeat url("/images/admin/icons/cancel.png") #ffb1b1;
+}
+
+/* line 484, ../../app/assets/stylesheets/admin.css.sass */
+.flash.flash_notice #flash_close, .flash.flash_error #flash_close, .flash.flash_alert #flash_close {
+  text-transform: lowercase;
+}
+/* line 486, ../../app/assets/stylesheets/admin.css.sass */
+.flash.flash_message {
+  background: #e0f5e0;
+  padding: 9px;
+  position: relative;
+  margin-bottom: 32px;
+}
+/* line 491, ../../app/assets/stylesheets/admin.css.sass */
+.flash.flash_message h2 {
+  margin-top: 12px;
+}
+
+/* line 494, ../../app/assets/stylesheets/admin.css.sass */
+.flash_message {
+  color: #262719;
+  font-size: 14px;
+}
+/* line 497, ../../app/assets/stylesheets/admin.css.sass */
+.flash_message * {
+  color: #262719;
+  font-size: 14px;
+}
+
+/* line 502, ../../app/assets/stylesheets/admin.css.sass */
+.flash a {
+  color: #e20003;
+  border-bottom-color: #e20003;
+}
+/* line 505, ../../app/assets/stylesheets/admin.css.sass */
+.flash a:hover {
+  color: #e20003;
+  border-bottom-color: #e20003;
+}
+/* line 508, ../../app/assets/stylesheets/admin.css.sass */
+.flash.flash_error a, .flash.flash_alert a {
+  display: none;
+}
+/* line 510, ../../app/assets/stylesheets/admin.css.sass */
+.flash.flash_error a:hover, .flash.flash_alert a:hover {
+  display: none;
+}
+
+/* line 514, ../../app/assets/stylesheets/admin.css.sass */
+noscript .flash.flash_error a, noscript .flash.flash_alert a {
+  display: inline;
+  font-weight: bold;
+}
+/* line 517, ../../app/assets/stylesheets/admin.css.sass */
+noscript .flash.flash_error a:hover, noscript .flash.flash_alert a:hover {
+  display: inline;
+  font-weight: bold;
+}
+
+/* line 522, ../../app/assets/stylesheets/admin.css.sass */
+.flash a#flash_close {
+  position: absolute;
+  right: 9px;
+  top: 7px;
+}
+/* line 526, ../../app/assets/stylesheets/admin.css.sass */
+.flash.flash_message a#flash_close {
+  top: 21px;
+}
