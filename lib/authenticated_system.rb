@@ -19,8 +19,6 @@ module AuthenticatedSystem
       @current_user = current_user_session && current_user_session.record
     end
     
-    
-
     # Store the given user id in the session.
     #def current_user=(new_user)
     #  session[:user_id] = new_user ? new_user.id : nil

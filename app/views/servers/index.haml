@@ -9,7 +9,7 @@
     -server.each_pair do |key,value|
       ="#{key} is #{value}"
     %tr
-      %td= link_to 'Show', server
+      %td= link_to 'Show', server_path(:id=>server[:id])
       %td= link_to 'Edit', edit_server_path(server)
       %td= link_to 'Destroy', server, :confirm => 'Are you sure?', :method => :delete
 %br/

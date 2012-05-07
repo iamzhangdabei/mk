@@ -13,7 +13,7 @@ class TenantsController < ApplicationController
   # GET /tenants/1
   # GET /tenants/1.json
   def show
-    @tenant = Tenant.find(params[:id])
+    @tenant = current_admin_connection.get_tenant(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

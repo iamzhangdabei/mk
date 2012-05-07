@@ -1,7 +1,6 @@
 -if logged_in?
   =current_user.login
   =link_to "登出", logout_path
-  =current_connection.servers
   
 -else
   =link_to "请登录", login_path

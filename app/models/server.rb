@@ -1,2 +1,3 @@
-class Server < ActiveRecord::Base
+class Server
+  
 end

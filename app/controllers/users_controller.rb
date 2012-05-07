@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    @users = current_admin_connection.tenants
+    @users = current_admin_connection.users
 
     respond_to do |format|
       format.html # index.html.erb
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = @current_user
+    @user = current_admin_connection.get_user(params[:id])
   end
 
   def edit

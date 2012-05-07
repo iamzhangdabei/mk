@@ -35,20 +35,21 @@ module Compute
   require 'compute/exception'
   require 'compute/address'
   require 'compute/personalities'
+  #require 'compute/tenant'
   
   # Constants that set limits on server creation
   MAX_PERSONALITY_ITEMS = 5
   MAX_PERSONALITY_FILE_SIZE = 10240
   MAX_SERVER_PATH_LENGTH = 255
-  
+
   # Helper method to recursively symbolize hash keys.
-  def self.symbolize_keys(obj)
+  def original_symbolize_keys(obj)
     case obj
     when Array
       obj.inject([]){|res, val|
         res << case val
         when Hash, Array
-          symbolize_keys(val)
+            symbolize_keys(val)
         else
           val
         end
@@ -75,7 +76,19 @@ module Compute
       obj
     end
   end
-  
+  def self.symbolize_keys(obj)
+
+    if obj.is_a?(Hash)
+
+      HashWithIndifferentAccess.new(obj)
+    elsif obj.is_a?(Array)
+
+      obj.collect{|c| HashWithIndifferentAccess.new(c)}
+    else
+
+      obj
+    end
+  end
   def self.paginate(options = {})
     path_args = []
     path_args.push(URI.encode("limit=#{options[:limit]}")) if options[:limit]

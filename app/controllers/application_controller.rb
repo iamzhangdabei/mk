@@ -2,7 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   include AuthenticatedSystem
   include OpenStack
-  def current_connection
+  
+    def current_connection
     return @current_connection if defined?(@current_connection)
     @current_connection =  OpenStack::Compute::Connection.new(:username => current_user.username, :api_key => current_user.api_key, :auth_url => current_user.auth_url)
   end
@@ -22,8 +23,9 @@ class ApplicationController < ActionController::Base
     tenant = tenants.select{|c| c["name"]==username}[0]
   end
   def glance
- return @glance if defined?(@glance)
+    return @glance if defined?(@glance)
     @glance =  OpenStack::Compute::Connection.new(:username => current_user.username, :api_key => current_user.api_key, :auth_url => current_user.auth_url,:glance=>true) 
   end
+
   helper_method :current_connection,:current_admin_connection,:glance
 end
