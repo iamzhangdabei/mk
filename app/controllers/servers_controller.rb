@@ -43,8 +43,8 @@ class ServersController < ApplicationController
     @server = compute.create_server(params[:server])
 
     respond_to do |format|
-      if @server.save
-        format.html { redirect_to @server, :notice => 'Server was successfully created.' }
+      if @server.saves
+        format.html { redirect_to servers_path, :notice => 'Server was successfully created.' }
         format.json { render :json => @server, :status => :created, :location => @server }
       else
         format.html { render :action => "new" }
@@ -56,7 +56,7 @@ class ServersController < ApplicationController
   # PUT /servers/1
   # PUT /servers/1.json
   def update
-    @server = compute.update_server(params[:server])
+    @server = compute.get_server(params[:id]).update(params[:server])
 
     respond_to do |format|
       if @server.update_attributes(params[:server])
@@ -72,8 +72,8 @@ class ServersController < ApplicationController
   # DELETE /servers/1
   # DELETE /servers/1.json
   def destroy
-    @server = Server.find(params[:id])
-    @server.destroy
+    @server = compute.get_server(params[:id])
+    @server.delete!
 
     respond_to do |format|
       format.html { redirect_to servers_url }

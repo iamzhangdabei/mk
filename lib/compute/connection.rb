@@ -126,8 +126,8 @@ module OpenStack
         return res
       end
 
-      def quotas(admin_connection)
-        response = req("get","/os-quota-sets/#{admin_connection.current_tenant[:id]}")
+      def quotas(keystone)
+        response = req("get","/os-quota-sets/#{keystone.current_tenant[:id]}")
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body))
       end
@@ -196,6 +196,7 @@ module OpenStack
          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volumes"])
       end
+
       def get_volume(id)
         response = erq("get","/os-volumes/#{id}")
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
@@ -219,19 +220,20 @@ module OpenStack
         response = erq("POST","/os-volumes",options)
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
-    
       end
+
       def delete_volume(id)
         response = erq("DELETE","/os-volumes/#{id}",options)
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
-    
       end
+
       def update_volume(id,options)
-         response = erq("POST","/os-volumes/#{id}",options)
+        response = erq("POST","/os-volumes/#{id}",options)
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
       end
+
       def current_tenant
         tenants.select{|c| c[:name]==authuser}[0]
       end
