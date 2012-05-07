@@ -2,7 +2,7 @@ class FlavorsController < ApplicationController
   # GET /flavors
   # GET /flavors.json
   def index
-    @flavors = current_connection.list_flavors
+    @flavors = compute.list_flavors
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class FlavorsController < ApplicationController
   # GET /flavors/1
   # GET /flavors/1.json
   def show
-    @flavor = Flavor.find(params[:id])
+    @flavor = compute.get_flavor(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

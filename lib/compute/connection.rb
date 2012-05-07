@@ -140,9 +140,23 @@ module OpenStack
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["users"])
       end
+
       def get_user(id)
         path =  "#{svrmgmtpath}/users/#{id}"
         response = csreq("GET",svrmgmthost,path,svrmgmtport,svrmgmtscheme)
+        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["user"])
+      end
+
+      #options should be {"user": {"id": base.getid(user),
+      #                     "tenantId": base.getid(tenant)}}
+      def update_user(user_id,options)
+        response = erq("POST","/users/#{user_id}",options)
+        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["user"])
+      end
+      def delete_user(user_id)
+        response = erq("DELETE","/users/#{user_id}",options)
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["user"])
       end
@@ -153,12 +167,70 @@ module OpenStack
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["tenants"])
       end
+
       def get_tenant(id)
         path = "#{svrmgmtpath}/tenants/#{id}"
         response = csreq("GET",svrmgmthost,path,svrmgmtport,svrmgmtscheme)
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["tenant"])
      
+      end
+      def delete_tenant(tenant_id)
+        response = erq("DELETE","/tenants/#{tenant_id}",options)
+        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["tenant"])
+      end
+
+      def update_tenant(tenant_id,options)
+        response = erq("POST","/tenants/#{tenant_id}",options)
+        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["tenant"])
+      end
+
+      def list_volumes(options, detailed=True):
+        if detailed == true
+          response = erq("get","/os-volumes/detail",options)
+        else
+          response = erq("get","/os-volumes",options)
+        end
+         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volumes"])
+      end
+      def get_volume(id)
+        response = erq("get","/os-volumes/#{id}")
+        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
+      end
+
+      def create_volume(options)
+         """
+        Create a volume.
+
+        :param size: Size of volume in GB
+        :param snapshot_id: ID of the snapshot
+        :param display_name: Name of the volume
+        :param display_description: Description of the volume
+        :rtype: :class:`Volume`
+        """
+        #body = {'volume': {'size': size,
+        #                    'snapshot_id': snapshot_id,
+        #                    'display_name': display_name,
+        #                    'display_description': display_description}}
+        response = erq("POST","/os-volumes",options)
+        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
+    
+      end
+      def delete_volume(id)
+        response = erq("DELETE","/os-volumes/#{id}",options)
+        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
+    
+      end
+      def update_volume(id,options)
+         response = erq("POST","/os-volumes/#{id}",options)
+        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
       end
       def current_tenant
         tenants.select{|c| c[:name]==authuser}[0]

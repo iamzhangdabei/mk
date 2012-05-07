@@ -1,0 +1,23 @@
+=form_tag('/servers')
+  .field
+    = label_tag :display_name
+    %br/
+    = text_field_tag  :display_name
+  .field
+    = label_tag :display_description
+    %br/
+    = text_field_tag :display_description
+  .field
+    = label_tag :metadata
+    %br/
+    = text_area_tag :metadata
+  .field
+    = label_tag :imageRef
+    %br/
+    = select_tag "imageRef", options_from_collection_for_select(glance.images, "id", "name")
+  .field
+    = label_tag :flavorRef
+    %br/
+    = select_tag "flavorRef", options_from_collection_for_select(@people, "id", "name")
+  .actions
+    = f.submit

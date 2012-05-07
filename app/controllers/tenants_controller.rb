@@ -2,7 +2,7 @@ class TenantsController < ApplicationController
   # GET /tenants
   # GET /tenants.json
   def index
-    @tenants = current_admin_connection.tenants
+    @tenants = keystone.tenants
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class TenantsController < ApplicationController
   # GET /tenants/1
   # GET /tenants/1.json
   def show
-    @tenant = current_admin_connection.get_tenant(params[:id])
+    @tenant = keystone.get_tenant(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

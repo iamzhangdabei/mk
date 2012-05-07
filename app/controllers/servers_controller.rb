@@ -2,7 +2,7 @@ class ServersController < ApplicationController
   # GET /servers
   # GET /servers.json
   def index
-    @servers = current_connection.servers
+    @servers = compute.servers
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class ServersController < ApplicationController
   # GET /servers/1
   # GET /servers/1.json
   def show
-    @server =  current_connection.get_server(params[:id])
+    @server =  compute.get_server(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -40,7 +40,7 @@ class ServersController < ApplicationController
   # POST /servers
   # POST /servers.json
   def create
-    @server = current_connection.create_server(params[:server])
+    @server = compute.create_server(params[:server])
 
     respond_to do |format|
       if @server.save
@@ -56,7 +56,7 @@ class ServersController < ApplicationController
   # PUT /servers/1
   # PUT /servers/1.json
   def update
-    @server = Server.find(params[:id])
+    @server = compute.update_server(params[:server])
 
     respond_to do |format|
       if @server.update_attributes(params[:server])

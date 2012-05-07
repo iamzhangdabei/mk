@@ -13,7 +13,7 @@ class ImagesController < ApplicationController
   # GET /images/1
   # GET /images/1.json
   def show
-    @image = current_connection.list_images
+    @image = glance.get_image(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
