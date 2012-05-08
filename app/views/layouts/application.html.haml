@@ -10,6 +10,7 @@
         超管平台
       = stylesheet_link_tag "admin.css", :media =>"screen"
       = stylesheet_link_tag "/stylesheets/jquery.autocomplete.css", :media =>"screen"
+      = javascript_include_tag "application"
       = csrf_meta_tags
   %body{ :lang => 'en', :class => [body_class_names, 'two-col'] }
     #header
@@ -51,6 +52,8 @@
               %li= link_to 'images', images_path
               %li= link_to 'quotas', "/page/quotas"
               %li= link_to 'services', "/page/services"
+              %li= link_to 'volumes', volumes_path
+              %li= link_to 'snapshots',snapshots_path
 
       / right
       %br{:style => "clear: both;"}

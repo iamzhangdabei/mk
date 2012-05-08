@@ -1,0 +1,15 @@
+= form_tag('/volumes') do
+  .field
+    = label_tag :name
+    %br/
+    = text_field_tag  :name
+  .field
+    = label_tag :description
+    %br/
+    = text_area_tag :description
+  .field
+    = label_tag :size
+    %br/
+    = text_field_tag  :size
+  .actions
+    = submit_tag "submit"

@@ -2,7 +2,7 @@ class VolumesController < ApplicationController
   # GET /volumes
   # GET /volumes.json
   def index
-    @volumes = Volume.all
+    @volumes = compute.list_volumes(true)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,8 +13,7 @@ class VolumesController < ApplicationController
   # GET /volumes/1
   # GET /volumes/1.json
   def show
-    @volume = Volume.find(params[:id])
-
+    @volume = compute.get_volume(params[:id].to_i)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @volume }
@@ -34,22 +33,18 @@ class VolumesController < ApplicationController
 
   # GET /volumes/1/edit
   def edit
-    @volume = Volume.find(params[:id])
+    @volume = compute.get_volume(params[:id].to_i)
   end
 
   # POST /volumes
   # POST /volumes.json
   def create
-    @volume = Volume.new(params[:volume])
+    @volume = compute.co.create_volume({"size"=>params[:size],"display_name"=>params[:name],"display_description"=>params[:description]})
+
 
     respond_to do |format|
-      if @volume.save
         format.html { redirect_to @volume, :notice => 'Volume was successfully created.' }
         format.json { render :json => @volume, :status => :created, :location => @volume }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @volume.errors, :status => :unprocessable_entity }
-      end
     end
   end
 
@@ -72,8 +67,7 @@ class VolumesController < ApplicationController
   # DELETE /volumes/1
   # DELETE /volumes/1.json
   def destroy
-    @volume = Volume.find(params[:id])
-    @volume.destroy
+    compute.delete_volume(params[:id].to_i)
 
     respond_to do |format|
       format.html { redirect_to volumes_url }

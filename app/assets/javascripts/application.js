@@ -6,4 +6,5 @@
 //
 //= require jquery
 //= require modernizr.min
+//= require jquery_ujs
 

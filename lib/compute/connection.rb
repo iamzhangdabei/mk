@@ -131,7 +131,13 @@ module OpenStack
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body))
       end
-
+def create_flavor(options)
+        data = JSON.generate(:flavor => options)
+        response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/tenants",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        tenant= JSON.parse(response.body)['tenant']
+        return tenant
+end
       def users(options = {})
         puts "---------------------------------------------"
         anti_cache_param="cacheid=#{Time.now.to_i}"
@@ -161,8 +167,7 @@ module OpenStack
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["user"])
       end
       def tenants(options={})
-        anti_cache_param="cacheid=#{Time.now.to_i}"
-        path = OpenStack::Compute.paginate(options).empty? ? "#{svrmgmtpath}/tenants?#{anti_cache_param}" : "#{svrmgmtpath}/tenants?#{OpenStack::Compute.paginate(options)}&#{anti_cache_param}"
+        path = OpenStack::Compute.paginate(options).empty? ? "#{svrmgmtpath}/tenants" : "#{svrmgmtpath}/tenants?#{OpenStack::Compute.paginate(options)}"
         response = csreq("GET",svrmgmthost,path,svrmgmtport,svrmgmtscheme)
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["tenants"])
@@ -173,8 +178,8 @@ module OpenStack
         response = csreq("GET",svrmgmthost,path,svrmgmtport,svrmgmtscheme)
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["tenant"])
-     
       end
+
       #params={"tenant"=>{"name"=>"","description"=>"",:enabled=>true}}
       def create_tenant(options)
         #raise OpenStack::Compute::Exception::MissingArgument, "Server name, flavorRef, and imageRef, must be supplied" unless (options[:name] && options[:flavorRef] && options[:imageRef])
@@ -185,23 +190,54 @@ module OpenStack
         return tenant
       end
 
+      def update_tenant(tenant_id,options)
+        #raise OpenStack::Compute::Exception::MissingArgument, "Server name, flavorRef, and imageRef, must be supplied" unless (options[:name] && options[:flavorRef] && options[:imageRef])
+        data = JSON.generate(:tenant => options)
+        response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/tenants/#{tenant_id}",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        tenant= JSON.parse(response.body)['tenant']
+        return tenant
+      end
+
       def delete_tenant(tenant_id)
         response = req("DELETE","/tenants/#{tenant_id}")
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
-        OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["tenant"])
+       end
+      def get_user_roles(user_id)
+         response = req("get","/users/#{user_id}/roleRefs")
+        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["roles"])       
+      end
+
+      def add_user_to_tenant(user_id,tenant_id)
+        options =  {"roleRef"=>{"tenantId"=>tenant_id,"roleId"=>"Member"}}
+        data = JSON.generate(options)
+        response = csreq("post",svrmgmthost,"/users/#{user_id}/roleRefs",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+      #response = csreq("POST",svrmgmthost,"/users/#{user_id}/roleRefs",svrmgmtport,svrmgmtscheme,svrmgmtscheme,{'content-type' => 'application/json'},data)
+        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["roleRef"])       
+     
+      end
+
+      def remove_user_to_tenant(user_id,tenant_id)
+        options =  {"roleRef"=>{"tenantId"=>tenant_id,"roleId"=>"Member"}}
+        response = req("POST","/users/#{user_id}/roleRefs",{'content-type' => 'application/json'},options)
+        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["roleRefs"])       
+     
       end
 
       def update_tenant(tenant_id,options)
-        response = req("POST","/tenants/#{tenant_id}",options)
+        response = req("POST","/tenants/#{tenant_id}",{'content-type' => 'application/json'},options)
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["tenant"])
       end
 
-      def list_volumes(options, detailed=True)
+      def list_volumes(detailed=True)
         if detailed == true
-          response = req("get","/os-volumes/detail",options)
+          response = req("get","/os-volumes/detail")
         else
-          response = req("get","/os-volumes",options)
+          response = req("get","/os-volumes")
         end
          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volumes"])
@@ -227,15 +263,17 @@ module OpenStack
         #                    'snapshot_id': snapshot_id,
         #                    'display_name': display_name,
         #                    'display_description': display_description}}
-        response = req("POST","/os-volumes",options)
+        data = JSON.generate(:volume => options)
+        response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/os-volumes",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
-        OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
+        volume= JSON.parse(response.body)['volume']
+        return volume
       end
 
       def delete_volume(id)
-        response = req("DELETE","/os-volumes/#{id}",options)
+        response = req("DELETE","/os-volumes/#{id}")
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
-        OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
+        #OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
       end
 
       def update_volume(id,options)

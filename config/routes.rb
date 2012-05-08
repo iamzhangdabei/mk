@@ -1,4 +1,6 @@
 Mk::Application.routes.draw do
+  resources :snapshots
+
   resources :volumes
 
   match "page/:action" => "page"

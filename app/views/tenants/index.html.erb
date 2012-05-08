@@ -10,14 +10,11 @@
 
 <% @tenants.each do |tenant| %>
   <tr>
-    <td><%=  tenant[:id] %></td>
+    <td><%= link_to  tenant[:id] ,tenant_path(:id=>tenant[:id])%></td>
     <td><%= tenant[:name] %></td>
     <td><%=  tenant[:description] %></td>
     <td><%=  tenant[:enabled] %></td>
-
-    <td><%= link_to 'Show', tenant %></td>
-    <td><%= link_to 'Edit', edit_tenant_path(tenant) %></td>
-    <td><%= link_to 'Destroy', tenant, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Destroy', tenant_path(:id=>tenant[:id]), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

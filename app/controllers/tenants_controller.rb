@@ -34,22 +34,20 @@ class TenantsController < ApplicationController
 
   # GET /tenants/1/edit
   def edit
-    @tenant = Tenant.find(params[:id])
+    @tenant =  keystone.get_tenant(params[:id])
   end
 
   # POST /tenants
   # POST /tenants.json
   def create
-    @tenant = Tenant.new(params[:tenant])
+    @tenant = keystone.create_tenant({"name"=>params[:name],"description"=>params[:description],:enabled=>true})
+
 
     respond_to do |format|
-      if @tenant.save
+     
         format.html { redirect_to @tenant, :notice => 'Tenant was successfully created.' }
         format.json { render :json => @tenant, :status => :created, :location => @tenant }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @tenant.errors, :status => :unprocessable_entity }
-      end
+     
     end
   end
 
@@ -72,8 +70,8 @@ class TenantsController < ApplicationController
   # DELETE /tenants/1
   # DELETE /tenants/1.json
   def destroy
-    @tenant = Tenant.find(params[:id])
-    @tenant.destroy
+     
+    keystone.delete_tenant(keystone.get_tenant(params[:id])[:id])
 
     respond_to do |format|
       format.html { redirect_to tenants_url }

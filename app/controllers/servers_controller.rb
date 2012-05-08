@@ -34,7 +34,7 @@ class ServersController < ApplicationController
 
   # GET /servers/1/edit
   def edit
-    @server = Server.find(params[:id])
+    @server = compute.get_server(params[:id])
   end
 
   # POST /servers
@@ -58,7 +58,6 @@ class ServersController < ApplicationController
   # PUT /servers/1.json
   def update
     @server = compute.get_server(params[:id]).update(params[:server])
-
     respond_to do |format|
       if @server.update_attributes(params[:server])
         format.html { redirect_to @server, :notice => 'Server was successfully updated.' }

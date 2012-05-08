@@ -2,16 +2,23 @@
 
 <table>
   <tr>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>size</th>
+    <th>status</th>
+    <th>attachments</th>
+
   </tr>
 
 <% @volumes.each do |volume| %>
   <tr>
-    <td><%= link_to 'Show', volume %></td>
-    <td><%= link_to 'Edit', edit_volume_path(volume) %></td>
-    <td><%= link_to 'Destroy', volume, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%=volume[:displayName]%></td>
+    <td><%=volume[:displayDescription]%></td>
+    <td><%=volume[:size]%></td>
+    <td><%=volume[:status]%></td>
+    <td><%= link_to 'Show', volume_path(:id=>volume[:id]) %></td>
+    <td><%= link_to 'Edit', edit_volume_path(:id=>volume[:id]) %></td>
+    <td><%= link_to 'Destroy', volume_path(:id=>volume[:id]) , :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
