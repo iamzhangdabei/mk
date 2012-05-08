@@ -1,0 +1,11 @@
+= form_tag('/tenants') do
+  .field
+    = label_tag :name
+    %br/
+    = text_field_tag  :name
+  .field
+    = label_tag :description
+    %br/
+    = text_area_tag :description
+  .actions
+    = submit_tag "create"

@@ -151,12 +151,12 @@ module OpenStack
       #options should be {"user": {"id": base.getid(user),
       #                     "tenantId": base.getid(tenant)}}
       def update_user(user_id,options)
-        response = erq("POST","/users/#{user_id}",options)
+        response = req("POST","/users/#{user_id}",options)
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["user"])
       end
       def delete_user(user_id)
-        response = erq("DELETE","/users/#{user_id}",options)
+        response = req("DELETE","/users/#{user_id}",options)
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["user"])
       end
@@ -175,30 +175,40 @@ module OpenStack
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["tenant"])
      
       end
+      #params={"tenant"=>{"name"=>"","description"=>"",:enabled=>true}}
+      def create_tenant(options)
+        #raise OpenStack::Compute::Exception::MissingArgument, "Server name, flavorRef, and imageRef, must be supplied" unless (options[:name] && options[:flavorRef] && options[:imageRef])
+        data = JSON.generate(:tenant => options)
+        response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/tenants",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        tenant= JSON.parse(response.body)['tenant']
+        return tenant
+      end
+
       def delete_tenant(tenant_id)
-        response = erq("DELETE","/tenants/#{tenant_id}",options)
+        response = req("DELETE","/tenants/#{tenant_id}")
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["tenant"])
       end
 
       def update_tenant(tenant_id,options)
-        response = erq("POST","/tenants/#{tenant_id}",options)
+        response = req("POST","/tenants/#{tenant_id}",options)
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["tenant"])
       end
 
-      def list_volumes(options, detailed=True):
+      def list_volumes(options, detailed=True)
         if detailed == true
-          response = erq("get","/os-volumes/detail",options)
+          response = req("get","/os-volumes/detail",options)
         else
-          response = erq("get","/os-volumes",options)
+          response = req("get","/os-volumes",options)
         end
          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volumes"])
       end
 
       def get_volume(id)
-        response = erq("get","/os-volumes/#{id}")
+        response = req("get","/os-volumes/#{id}")
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
       end
@@ -217,13 +227,13 @@ module OpenStack
         #                    'snapshot_id': snapshot_id,
         #                    'display_name': display_name,
         #                    'display_description': display_description}}
-        response = erq("POST","/os-volumes",options)
+        response = req("POST","/os-volumes",options)
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
       end
 
       def delete_volume(id)
-        response = erq("DELETE","/os-volumes/#{id}",options)
+        response = req("DELETE","/os-volumes/#{id}",options)
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
       end

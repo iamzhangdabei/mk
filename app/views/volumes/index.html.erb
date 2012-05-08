@@ -1,0 +1,21 @@
+<h1>Listing volumes</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @volumes.each do |volume| %>
+  <tr>
+    <td><%= link_to 'Show', volume %></td>
+    <td><%= link_to 'Edit', edit_volume_path(volume) %></td>
+    <td><%= link_to 'Destroy', volume, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Volume', new_volume_path %>

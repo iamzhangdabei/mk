@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120507023510) do
+ActiveRecord::Schema.define(:version => 20120508025918) do
 
   create_table "flavors", :force => true do |t|
     t.string   "name"
@@ -65,6 +65,11 @@ ActiveRecord::Schema.define(:version => 20120507023510) do
     t.string   "api_key"
     t.string   "auth_url"
     t.string   "login"
+  end
+
+  create_table "volumes", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

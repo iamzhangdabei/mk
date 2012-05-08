@@ -1,12 +1,8 @@
-=form_tag('/servers')
+= form_tag('/servers') do
   .field
-    = label_tag :display_name
+    = label_tag :name
     %br/
-    = text_field_tag  :display_name
-  .field
-    = label_tag :display_description
-    %br/
-    = text_field_tag :display_description
+    = text_field_tag  :name
   .field
     = label_tag :metadata
     %br/
@@ -14,10 +10,10 @@
   .field
     = label_tag :imageRef
     %br/
-    = select_tag "imageRef", options_from_collection_for_select(glance.images, "id", "name")
+    = select_tag "imageRef", options_for_select(glance.images.collect{|image| [ image[:name], image[:id] ]})
   .field
     = label_tag :flavorRef
     %br/
-    = select_tag "flavorRef", options_from_collection_for_select(@people, "id", "name")
+    = select_tag "flavorRef", options_for_select(compute.flavors.collect{|p| [ p[:name]+"#{p[:vcpus]} VCPU / #{p[:disk]} GB Dish / #{p[:ram]} MB Ram", p[:links][0][:href].split("/").last]})
   .actions
-    = f.submit
+    = submit_tag "submit"

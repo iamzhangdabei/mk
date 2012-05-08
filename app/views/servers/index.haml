@@ -2,15 +2,20 @@
 %table
   %tr
     %th Name
-    %th
-    %th
-    %th
+    %th Ip
+    %th Size
+    %th Status
+    %th Power Status
   - @servers.each do |server|
-    -server.each_pair do |key,value|
-      ="#{key} is #{value}"
     %tr
-      %td= link_to 'Show', server_path(:id=>server[:id])
+      -real_server = compute.get_server(server[:id])
+      %td= link_to real_server.name, server_path(:id=>real_server.id)
+      %td= real_server.addresses[0].try(:address)
+      -flavor =compute.flavors.select{|c| c["id"]==real_server.flavor["id"]}[0]
+      %td= link_to flavor[:name]+"#{flavor[:vcpus]} VCPU / #{flavor[:disk]} GB Dish / #{flavor[:ram]} MB Ram"
+      %td= real_server.status
+      %td=real_server.progress == 0 && "running" || "No status"
       %td= link_to 'Edit', edit_server_path(server)
-      %td= link_to 'Destroy', server, :confirm => 'Are you sure?', :method => :delete
+      %td=link_to 'Destroy', server, :confirm => 'Are you sure?', :method => :delete
 %br/
 = link_to 'New Server', new_server_path

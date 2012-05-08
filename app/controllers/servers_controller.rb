@@ -40,16 +40,17 @@ class ServersController < ApplicationController
   # POST /servers
   # POST /servers.json
   def create
-    @server = compute.create_server(params[:server])
+    #:name        => 'NewServer',
+      #        :imageRef    => 'http://172.19.0.3/v1.1/images/3',
+      #        :flavorRef   => 'http://172.19.0.3/v1.1/flavors/1',
+      #        :metadata    => {'Racker' => 'Fanatical'},
+      #        :personality => {'/home/bob/wedding.jpg' => '/root/wedding.jpg'})
+    @server = compute.create_server(:name=>params[:name],:imageRef=>params[:imageRef],:flavorRef=>params[:flavorRef])
 
     respond_to do |format|
-      if @server.saves
+
         format.html { redirect_to servers_path, :notice => 'Server was successfully created.' }
         format.json { render :json => @server, :status => :created, :location => @server }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @server.errors, :status => :unprocessable_entity }
-      end
     end
   end
 

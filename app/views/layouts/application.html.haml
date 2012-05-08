@@ -32,25 +32,16 @@
         = yield
       / content
       #right
-        -if logged_in? 
-          #right-title 管理功能
-          %ul.menu
-            %li.groups
-              %form{:action => "/admin/groups"}
-                %input{:name => "search", :size => "6"}/
-                %input{:type => "submit", :value => "查找小组"}/
-              %ul.group-filter
-                %li= link_to '所有', "/"
-            %li
-              %a{:href => "/admin/statistic/stats"} 查看统计信息
-            %li
-              %form{:action => "/admin/articles"}
-                %input{:name => "status", :type => "hidden", :value => "all"}/
-                \#
-                %input{:name => "id", :size => "6"}/
-                %input{:type => "submit", :value => "查找帖子"}/
-            %h5 关键字过滤
-            %ul.menu
+        -if logged_in?
+          - if  params[:tenant_id]
+            #right-title
+              %h5 管理
+              %ul.menu
+                %li= link_to 'servers', tenant_servers_path(:tenant_id=>current_tenant[:id])
+                %li= link_to 'flavors', tenant_flavors_path(:tenant_id=>current_tenant[:id])
+                %li= link_to 'images', tenant_images_path(:tenant_id=>current_tenant[:id])
+                %li= link_to 'volumes', tenant_volumes_path(:tenant_id=>current_tenant[:id])
+          #right-title
             %h5 管理
             %ul.menu
               %li= link_to 'users', users_path

@@ -1,10 +1,13 @@
 Mk::Application.routes.draw do
+  resources :volumes
+
   match "page/:action" => "page"
   resources :tenants do
     resources :flavors
     resources :images
     resources :servers
     resources :volumes
+    match "/quotas/edit" => "quotas#edit"
   end
   resources :tenants
 
