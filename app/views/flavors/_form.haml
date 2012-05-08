@@ -1,0 +1,24 @@
+= form_tag('/flavors') do
+  .field
+    = label_tag :name
+    %br/
+    = text_field_tag  :name
+  .field
+    = label_tag :vcpus
+    %br/
+    = text_area_tag :vcpus
+  .field
+    = label_tag :ram
+    %br/
+    = text_area_tag :ram
+  .field
+    = label_tag :disk
+    %br/
+    = text_area_tag :disk   
+  .field
+    = label_tag "ephemeral"
+    %br/
+    = text_area_tag "ephemeral"
+
+  .actions
+    = submit_tag "submit"
