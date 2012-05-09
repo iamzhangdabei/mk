@@ -2,6 +2,11 @@ module OpenStack
   module Compute
     module Conn
       module ServerAspect
+        def get_all_servers_for_all_tenants
+            response =  req("get","/servers?all_tenants=true")
+            OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+            OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["servers"])
+        end
         # Returns the OpenStack::Compute::Server object identified by the given id.
         #
         #   >> server = cs.get_server(110917)

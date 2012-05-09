@@ -132,7 +132,11 @@ module OpenStack
         end
         return res
       end
-
+      def tenant_usages
+        response = req("get","/os-simple-tenant-usage")
+        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        OpenStack::Compute.symbolize_keys(JSON.parse(response.body))["tenant_usages"]
+      end
       def quotas(keystone)
         response = req("get","/os-quota-sets/#{keystone.current_tenant[:id]}")
         OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
