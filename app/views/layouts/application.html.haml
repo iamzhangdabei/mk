@@ -34,14 +34,20 @@
       / content
       #right
         -if logged_in?
-          - if  params[:tenant_id]
+          - if  params[:tenant_id] or @tenant
+            now you are looking tenant:
+            =current_tenant["name"]
             #right-title
-              %h5 管理
+              %h5 
+                管理
+                ="#{current_tenant['name']}"
               %ul.menu
-                %li= link_to 'servers', tenant_servers_path(:tenant_id=>current_tenant[:id])
-                %li= link_to 'flavors', tenant_flavors_path(:tenant_id=>current_tenant[:id])
-                %li= link_to 'images', tenant_images_path(:tenant_id=>current_tenant[:id])
-                %li= link_to 'volumes', tenant_volumes_path(:tenant_id=>current_tenant[:id])
+                %li= link_to 'servers', tenant_servers_path(:tenant_id=>current_tenant["id"])
+                %li= link_to 'flavors', tenant_flavors_path(:tenant_id=>current_tenant["id"])
+                %li= link_to 'images', tenant_images_path(:tenant_id=>current_tenant["id"])
+                %li= link_to 'volumes', tenant_volumes_path(:tenant_id=>current_tenant["id"])
+                %li= link_to 'snapshots', tenant_snapshots_path(:tenant_id=>current_tenant["id"])
+                %li= link_to 'users', tenant_users_path(:tenant_id=>current_tenant["id"])
           #right-title
             %h5 管理
             %ul.menu

@@ -25,8 +25,15 @@ module Compute
     require "jcode"
     $KCODE = 'u'
   end
+  require 'compute/conn/flavor_aspect'
+  require 'compute/conn/image_aspect'
+  require 'compute/conn/role_aspect'
+  require 'compute/conn/server_aspect'
+  require 'compute/conn/snapshot_aspect'
+  require 'compute/conn/tenant_aspect'
+  require 'compute/conn/user_aspect'
+  require 'compute/conn/volume_aspect'
 
-  $:.unshift(File.dirname(__FILE__))
   require 'compute/authentication'
   require 'compute/connection'
   require 'compute/server'
@@ -35,7 +42,7 @@ module Compute
   require 'compute/exception'
   require 'compute/address'
   require 'compute/personalities'
-  #require 'compute/tenant'
+
   
   # Constants that set limits on server creation
   MAX_PERSONALITY_ITEMS = 5

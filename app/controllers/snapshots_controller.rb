@@ -2,7 +2,7 @@ class SnapshotsController < ApplicationController
   # GET /snapshots
   # GET /snapshots.json
   def index
-    @snapshots = Snapshot.all
+    @snapshots = compute.snapshots
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +13,7 @@ class SnapshotsController < ApplicationController
   # GET /snapshots/1
   # GET /snapshots/1.json
   def show
-    @snapshot = Snapshot.find(params[:id])
+    @snapshot = compute.get_snapshot(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,22 +34,16 @@ class SnapshotsController < ApplicationController
 
   # GET /snapshots/1/edit
   def edit
-    @snapshot = Snapshot.find(params[:id])
+    @snapshot = compute.get_snapshot(params[:id])
   end
 
   # POST /snapshots
   # POST /snapshots.json
   def create
-    @snapshot = Snapshot.new(params[:snapshot])
-
+    compute.create_snapshot({"volume_id"=>params[:volume_id],"force"=>false,"display_name"=>params["display_name"],"display_description"=>params["display_description"]})
     respond_to do |format|
-      if @snapshot.save
-        format.html { redirect_to @snapshot, :notice => 'Snapshot was successfully created.' }
+        format.html { redirect_to snapshots_url, :notice => 'Snapshot was successfully created.' }
         format.json { render :json => @snapshot, :status => :created, :location => @snapshot }
-      else
-        format.html { render :action => "new" }
-        format.json { render :json => @snapshot.errors, :status => :unprocessable_entity }
-      end
     end
   end
 
@@ -72,8 +66,7 @@ class SnapshotsController < ApplicationController
   # DELETE /snapshots/1
   # DELETE /snapshots/1.json
   def destroy
-    @snapshot = Snapshot.find(params[:id])
-    @snapshot.destroy
+     compute.delete_snapshot(params[:id])
 
     respond_to do |format|
       format.html { redirect_to snapshots_url }

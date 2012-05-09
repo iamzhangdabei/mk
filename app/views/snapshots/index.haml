@@ -1,0 +1,20 @@
+%h1 Listing snapshots
+%table
+  %tr
+    %th Name
+    %th Description
+    %th Size
+    %th Status
+    %th Volume ID   
+  - @snapshots.each do |snapshot|
+    %tr
+      -#{"id"=>1, "displayDescription"=>"sadf", "displayName"=>"asdf", "createdAt"=>"2012-05-09 01:36:45", "status"=>"available", "size"=>1, "volumeId"=>1} 
+      %td=link_to snapshot[:displayName], snapshot_path(:id=>snapshot[:id])
+      %td=snapshot[:displayDescription]
+      %td=snapshot[:size]
+      %td=snapshot[:status]
+      %td=snapshot[:volumeId]
+      %td=snapshot[:createdAt]
+      %td= link_to 'Destroy', snapshot_path(:id=>snapshot[:id]), :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Snapshot', new_snapshot_path

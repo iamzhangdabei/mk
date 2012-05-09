@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
   end
   def reload_compute
     if params[:tenant_id]
-    @compute =  OpenStack::Compute::Connection.new(:username => current_user.username, :api_key => current_user.api_key, :auth_url => current_user.auth_url,:authtenant=>params[:tenant_id])
+      puts current_tenant[:name]
+      @compute =  OpenStack::Compute::Connection.new(:username => current_user.username, :api_key => current_user.api_key, :auth_url => current_user.auth_url,:authtenant=>current_tenant["name"])
     end
   end
   def keystone
@@ -23,7 +24,9 @@ class ApplicationController < ActionController::Base
   def current_tenant
     if params[:tenant_id]
       tenants =  JSON.parse(keystone.req("get","/tenants").body)["tenants"]
-      tenant = tenants.select{|c| c["name"]==@compute.authtenant}[0]
+      tenant = tenants.select{|c| c["id"]==params[:tenant_id]}[0]
+    elsif @tenant
+      tenant = @tenant
     end
   end
   def glance

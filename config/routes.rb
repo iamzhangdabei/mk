@@ -10,6 +10,8 @@ Mk::Application.routes.draw do
     resources :servers
     resources :volumes
     match "/quotas/edit" => "quotas#edit"
+    resources :snapshots
+    resources :users
   end
   resources :tenants
 
