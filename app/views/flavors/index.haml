@@ -1,18 +1,26 @@
-%h1 Listing flavors
-%table
-  %tr
-    %th id
-    %th name
-    %th vcpus
-    %th memory
-    %th root disk
-    %th ephemeral disk
-  - @flavors.each do |flavor|
-    %tr
-      %td= flavor[:id]
-      %td= flavor[:name]
-      %td= flavor[:vcpus]
-      %td= flavor[:disk]
-      %td= flavor["OS-FLV-EXT-DATA:ephemeral"]
-%br/
+=controller_name
+=action_name
+.table_wrapper
+  %table#instances.table.table-bordered.table-striped
+    %thead
+      %tr
+        %th.multi_select_column
+        %th id
+        %th name
+        %th vcpus
+        %th memory
+        %th root disk
+        %th ephemeral disk
+        %th.actions_column Actions
+    %tbody
+      - @flavors.sort{|a,b| a[:id]<=>b[:id]}.each do |flavor|
+        %tr
+          %td.multi_select_column
+          %td= flavor[:id]
+          %td= flavor[:name]
+          %td= flavor[:vcpus]
+          %td= flavor[:ram]
+          %td= flavor[:disk]
+          %td= flavor["OS-FLV-EXT-DATA:ephemeral"]
+          %td.actions_column=link_to "delete",flavor_path(:id=>flavor[:id]), :confirm => 'Are you sure?', :method => :delete
 = link_to 'New Flavor', new_flavor_path

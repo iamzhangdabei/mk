@@ -1,4 +1,11 @@
-%h1 Listing quotas
-- @quotas[:quota_set].each_pair do |key,value|
-  ="#{key} is #{value}"
-  %br
+.table_wrapper
+  %table#instances.table.table-bordered.table-striped
+    %thead
+      %tr
+        %th Quota Name
+        %th Limit
+    %tbody
+      - @quotas[:quota_set].each_pair do |key,value|
+        %tr
+          %td= "#{key}"
+          %td= "#{value}"

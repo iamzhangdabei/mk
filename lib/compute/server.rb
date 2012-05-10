@@ -64,7 +64,8 @@ module OpenStack
         true
       end
       alias :refresh :populate
-      
+
+
       # Sends an API request to reboot this server.  Takes an optional argument for the type of reboot, which can be "SOFT" (graceful shutdown)
       # or "HARD" (power cycle).  The hard reboot is also triggered by server.reboot!, so that may be a better way to call it.
       #

@@ -1,0 +1,16 @@
+%h4 System Panel
+%ul.main_nav
+  %li
+    =link_to "Servers",servers_path,:class=>(controller_name == "servers" && "active")
+  %li
+    =link_to "Services","/page/services",:class=>(action_name == "services" && "active")
+  %li
+    =link_to "Flavors",flavors_path,:class=>(controller_name == "flavors" && "active")
+  %li
+    =link_to "Images",images_path,:class=>(controller_name == "images" && "active")
+  %li
+    =link_to "Tenants",tenants_path,:class=>(controller_name == "tenants" && "active")
+  %li
+    =link_to "Users",users_path,:class=>(controller_name == "users" && "active")
+  %li
+    =link_to "Quotas","/page/quotas",:class=>(action_name == "quotas" && "active")

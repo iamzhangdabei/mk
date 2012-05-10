@@ -1,17 +1,21 @@
 %h1 Listing images
-%table
-  %tr
-    %th Name
-    %th Status
-    %th Public
-    %th Container Format
-  - @images.each do |image|
-    -image.each_pair do |key,value|
-      ="#{key} is #{value}"
-    %tr
-      %td= image[:name]
-      %td= image[:status]
-      %td= (image[:is_public] == true && "Yes")||"No"
-      %td= image[:container_format]
-%br/
-= link_to 'New Image', new_image_path
+.table_wrapper
+  %table#instances.table.table-bordered.table-striped
+    %thead
+      %tr
+        %th.multi_select_column
+        %th Name
+        %th Status
+        %th Public
+        %th Container Format
+        %th.actions_column Actions
+    %tbody
+      - @images.each do |image|
+        %tr.status_up
+          %td.multi_select_column
+            %input{:name => "object_ids", :type => "checkbox", :value => "c9b500d6-1d6c-4e42-bef1-72e2c59252e0"}/
+          %td= image[:name]
+          %td= image[:status]
+          %td= (image[:is_public] == true && "Yes")||"No"
+          %td= image[:container_format]
+

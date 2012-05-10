@@ -1,21 +1,68 @@
-%h1 Listing servers
-%table
-  %tr
-    %th Name
-    %th Ip
-    %th Size
-    %th Status
-    %th Power Status
-  - @servers.each do |server|
-    %tr
-      -real_server = compute.get_server(server[:id])
-      %td= link_to real_server.name, server_path(:id=>real_server.id)
-      %td= real_server.addresses[0].try(:address)
-      -flavor =compute.flavors.select{|c| c["id"]==real_server.flavor["id"]}[0]
-      %td= link_to flavor[:name]+"#{flavor[:vcpus]} VCPU / #{flavor[:disk]} GB Dish / #{flavor[:ram]} MB Ram"
-      %td= real_server.status
-      %td=real_server.progress == 0 && "running" || "No status"
-      %td= link_to 'Edit', edit_server_path(server)
-      %td=link_to 'Destroy', server, :confirm => 'Are you sure?', :method => :delete
-%br/
-= link_to 'New Server', new_server_path
+
+.table_wrapper
+  %table#instances.table.table-bordered.table-striped
+    %thead
+      %tr
+        %th.multi_select_column
+        %th Tenant
+        %th User
+        %th Instance ID
+        %th Host
+        %th Instance Name
+        %th IP Address
+        %th Size
+        %th Status
+        %th Task
+        %th Power State
+        %th.actions_column Actions
+    %tbody
+      - @servers.each do |server|
+        %tr.status_up
+          %td.multi_select_column
+            %input{:name => "object_ids", :type => "checkbox", :value => "c9b500d6-1d6c-4e42-bef1-72e2c59252e0"}/
+          -real_server = compute.get_server(server[:id])
+          -server_detail = compute.get_server_detail(server[:id])
+          %td
+            = server_detail[:tenant_id]
+            (
+            -#= keystone.get_tenant(server_detail[:tenant_id])[:name]
+            )
+          %td= server_detail[:user_id]
+          %td= server_detail[:id]+"(#{server_detail['OS-EXT-SRV-ATTR:instance_name']})"
+          %td= server_detail["OS-EXT-SRV-ATTR:host"]
+          %td= link_to real_server.name, server_path(:id=>real_server.id)
+          %td= real_server.addresses[0].try(:address)
+          -flavor =compute.flavors.select{|c| c["id"]==real_server.flavor["id"]}[0]
+          %td= flavor[:name]+"#{flavor[:vcpus]} VCPU / #{flavor[:disk]} GB Dish / #{flavor[:ram]} MB Ram"
+          %td= real_server.status
+          %td=server_detail["OS-EXT-STS:task_state"].nil?? "No":server_detail["OS-EXT-STS:task_state"]
+          %td=server_detail["OS-EXT-STS:power_state"] == 1 && "running" || "No status"
+          %td.actions_column
+            .btn-group
+              %a.ajax-modal.btn.btn-small{:href => "/nova/instances_and_volumes/instances/c9b500d6-1d6c-4e42-bef1-72e2c59252e0/update"} Edit Instance
+              %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                %span.caret
+              %ul.dropdown-menu.row_actions.clearfix
+                %li.clearfix
+                  %a.btn.btn-small{:href => "/nova/instances_and_volumes/instances/c9b500d6-1d6c-4e42-bef1-72e2c59252e0/vnc"} VNC Console
+                %li.clearfix
+                  %a.btn.btn-small{:href => "/nova/instances_and_volumes/instances/c9b500d6-1d6c-4e42-bef1-72e2c59252e0/console"} View Log
+                %li.clearfix
+                  %a.ajax-modal.btn.btn-small{:href => "/nova/images_and_snapshots/c9b500d6-1d6c-4e42-bef1-72e2c59252e0/create"} Snapshot
+                %li.clearfix
+                  %button.btn.btn-small{:name => "action", :type => "submit", :value => "instances__pause__c9b500d6-1d6c-4e42-bef1-72e2c59252e0"} Pause Instance
+                %li.clearfix
+                  %button.btn.btn-small{:name => "action", :type => "submit", :value => "instances__suspend__c9b500d6-1d6c-4e42-bef1-72e2c59252e0"} Suspend Instance
+                %li.clearfix
+                  %button.btn.btn-small.btn-danger{:name => "action", :type => "submit", :value => "instances__reboot__c9b500d6-1d6c-4e42-bef1-72e2c59252e0"} Reboot Instance
+                %li.clearfix
+                  %button.btn.btn-small.btn-danger{:name => "action", :type => "submit", :value => "instances__terminate__c9b500d6-1d6c-4e42-bef1-72e2c59252e0"} Terminate Instance
+                %li.clearfix
+                  %a.btn.btn-small.ajax-update.hide{"data-update-interval" => "2500", :href => "/syspanel/instances/?action=update&table=instances&obj_id=c9b500d6-1d6c-4e42-bef1-72e2c59252e0"} Update
+          -#%td= link_to 'Edit', edit_server_path(server)
+          -#%td=link_to 'Destroy', server, :confirm => 'Are you sure?', :method => :delete
+    %tfoot
+      %tr
+        %td{:colspan => "12"}
+          %span Displaying 1 item
+  = link_to 'New Server', new_server_path

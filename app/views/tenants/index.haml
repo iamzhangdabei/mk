@@ -1,4 +1,4 @@
-%h1 Listing users
+%h1 Listing tenants
 .table_wrapper
   %table#instances.table.table-bordered.table-striped
     %thead
@@ -6,18 +6,18 @@
         %th.multi_select_column
         %th id
         %th Name
-        %th Email
+        %th Desciription
         %th Enabled
         %th actions_column
     %tbody
-      - @users.each do |user|
+      - @tenants.each do |tenant|
         %tr.status_up
           %td.multi_select_column
             %input{:name => "object_ids", :type => "checkbox", :value => "c9b500d6-1d6c-4e42-bef1-72e2c59252e0"}/
-          %td=user[:id]
-          %td=user[:name]
-          %td=user[:email]
-          %td=user[:enabled]
+          %td= link_to  tenant[:id] ,tenant_path(:id=>tenant[:id])
+          %td=tenant[:name]
+          %td=tenant[:description]
+          %td=tenant[:enabled]
           %td.actions_column
             .btn-group
-              =link_to 'Destroy', user_path(:id=>user[:id]), :confirm => 'Are you sure?', :method => :delete 
+              =link_to 'Destroy', tenant_path(:id=>tenant[:id]), :confirm => 'Are you sure?', :method => :delete 

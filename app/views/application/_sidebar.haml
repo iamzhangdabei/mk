@@ -1,0 +1,21 @@
+#tenant_switcher.dropdown.switcher_bar{:tabindex => "1"}
+  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#tenant_switcher"}
+    %h4 Project
+    %h3 admin
+  %ul#tenant_list.dropdown-menu
+    %li.divider
+    %li
+      %a{:href => "/auth/switch/a761403befdb47faa83ffecdbfb4cc3e/"} demo
+    %li
+      %a{:href => "/auth/switch/ad75cae1d548445180414ecb1bd03ee0/"} admin
+%h4 Manage Compute
+%ul.main_nav
+  %li
+    %a.active{:href => "/nova/", :tabindex => "1"} Overview
+  %li
+    =link_to "servers",tenant_servers_path(:tenant_id=>current_tenant["id"])
+    %a{:href => "/nova/instances_and_volumes/", :tabindex => "1"} Instances & Volumes
+  %li
+    %a{:href => "/nova/access_and_security/", :tabindex => "1"} Access & Security
+  %li
+    %a{:href => "/nova/images_and_snapshots/", :tabindex => "1"} Images & Snapshots

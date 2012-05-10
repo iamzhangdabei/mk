@@ -1,7 +1,74 @@
-%p#notice= notice
-%p
-  %b Name:
-  = @server.name
-= link_to 'Edit', edit_server_path(@server)
-|
-\#{link_to 'Back', servers_path}
+.row-fluid
+  .span12
+    %ul#instance_details.nav.nav-tabs.ajax-tabs
+      %li.active
+        %a{"data-loaded" => "true", "data-target" => "#instance_details__overview", "data-toggle" => "tab", :href => "?tab=instance_details__overview"} Overview
+      %li
+        %a{"data-loaded" => "false", "data-target" => "#instance_details__log", "data-toggle" => "tab", :href => "?tab=instance_details__log"} Log
+      %li
+        %a{"data-loaded" => "false", "data-target" => "#instance_details__vnc", "data-toggle" => "tab", :href => "?tab=instance_details__vnc"} VNC
+    .tab-content
+      #instance_details__overview.tab-pane.active
+        %h3 Instance Overview
+        .status.row-fluid
+          %h4 Status
+          %hr.header_rule
+            %ul
+              %li
+                %strong Status:
+                =real_server.status
+                =@server_detail["OS-EXT-STS:task_state"].nil?? "No":server_detail["OS-EXT-STS:task_state"]
+              %li
+                %strong> Instance Name:
+                \ asdfsadf
+              %li
+                %strong> Instance ID:
+                \ c9b500d6-1d6c-4e42-bef1-72e2c59252e0
+        .specs.row-fluid
+          %h4 Specs
+          %hr.header_rule
+            %ul
+              %li
+                %strong> RAM:
+                \ 512MB
+              %li
+                %strong> VCPUs:
+                \ 1 VCPU
+              %li
+                %strong> Disk:
+                \ 0GB
+        .addresses.row-fluid
+          %h4 IP Addresses
+          %hr.header_rule
+            %ul
+              %li
+                %strong Private:
+                10.0.0.2
+        .security_groups.row-fluid
+          %h4 Security Groups
+          %hr.header_rule
+            %ul
+              %li
+                %strong default
+                %ul
+                  %li
+                    %em No rules defined.
+        .meta.row-fluid
+          %h4 Meta
+          %hr.header_rule
+            %ul
+              %li
+                %strong> Key name:
+                \ 
+                %em None
+              %li
+                %strong> Image Name:
+                \ cirros-0.3.0-x86_64-blank
+        .volumes.row-fluid
+          %h4 Volumes
+          %hr.header_rule
+            %ul
+              %li
+                %em No volumes attached.
+      #instance_details__log.tab-pane
+      #instance_details__vnc.tab-pane

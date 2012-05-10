@@ -7,12 +7,18 @@ module OpenStack
             OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
             OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["servers"])
         end
+        def get_server_detail(id)
+          response = req("get","/servers/#{id}")
+          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+          OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["server"])
+        end
         # Returns the OpenStack::Compute::Server object identified by the given id.
         #
         #   >> server = cs.get_server(110917)
         #   => #<OpenStack::Compute::Server:0x101407ae8 ...>
         #   >> server.name
         #   => "MyServer"
+
         def get_server(id)
           OpenStack::Compute::Server.new(self,id)
         end

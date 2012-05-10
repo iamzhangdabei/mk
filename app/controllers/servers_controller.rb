@@ -14,7 +14,7 @@ class ServersController < ApplicationController
   # GET /servers/1.json
   def show
     @server =  compute.get_server(params[:id])
-
+    @server_detail = compute.get_server_detail(params[:id])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @server }

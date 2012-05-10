@@ -1,12 +1,11 @@
-%h1 Listing services
-%table
-  %tr
-    %th Name
-    %th Host
-    %th Enabled
-  - @services.each do |service|
-    %tr
-      %td= service["type"]
-      %td=  URI.parse(service["endpoints"][0]["publicURL"]).host
-      %td= service[:email]
-      %td= service[:enabled]
+.table_wrapper
+  %table#instances.table.table-bordered.table-striped
+    %thead
+      %tr
+        %th Name
+        %th Host
+    %tbody
+      - @services.each do |service|
+        %tr
+          %td= service["type"]
+          %td=  URI.parse(service["endpoints"][0]["publicURL"]).host

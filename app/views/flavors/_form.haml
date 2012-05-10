@@ -1,24 +1,40 @@
-= form_tag('/flavors') do
-  .field
-    = label_tag :name
-    %br/
-    = text_field_tag  :name
-  .field
-    = label_tag :vcpus
-    %br/
-    = text_area_tag :vcpus
-  .field
-    = label_tag :ram
-    %br/
-    = text_area_tag :ram
-  .field
-    = label_tag :disk
-    %br/
-    = text_area_tag :disk   
-  .field
-    = label_tag "ephemeral"
-    %br/
-    = text_area_tag "ephemeral"
-
-  .actions
-    = submit_tag "submit"
+#create_flavor_modal.modal.hide.in{:style => "display: block;"}
+  .modal-header
+    %a.close{"data-dismiss" => "modal", :href => "#"} ×
+    %h3 Create Flavor
+  %form#create_flavor_form{:action => "/flavors", :method => "POST"}
+    .modal-body.clearfix
+      .left
+        %fieldset
+          %input#id_method{:name => "method", :type => "hidden", :value => "CreateFlavor"}
+            .control-group.form-field.clearfix
+              %label{:for => "id_name"} Name
+              %span.help-block{:style => "display: none;"}
+              .input
+                %input#id_name{:maxlength => "25", :name => "name", :type => "text"}
+            .control-group.form-field.clearfix
+              %label{:for => "id_vcpus"} VCPUs
+              %span.help-block{:style => "display: none;"}
+              .input
+                %input#id_vcpus{:name => "vcpus", :type => "text"}
+            .control-group.form-field.clearfix
+              %label{:for => "id_ram"} Memory MB
+              %span.help-block{:style => "display: none;"}
+              .input
+                %input#id_memory_mb{:name => "ram", :type => "text"}
+            .control-group.form-field.clearfix
+              %label{:for => "id_disk"} Root Disk GB
+              %span.help-block{:style => "display: none;"}
+              .input
+                %input#id_disk_gb{:name => "disk", :type => "text"}
+            .control-group.form-field.clearfix
+              %label{:for => "id_ephemeral"} Ephemeral Disk GB
+              %span.help-block{:style => "display: none;"}
+              .input
+                %input#id_eph_gb{:name => "ephemeral", :type => "text"}
+      .right
+        %h3 Description:
+        %p From here you can define the sizing of a new flavor.
+    .modal-footer
+      %input.btn.btn-primary.pull-right{:type => "submit", :value => "Create Flavor"}
+        %a.btn.secondary.cancel.close{:href => "/syspanel/flavors/"} Cancel
