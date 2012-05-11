@@ -23,16 +23,17 @@
           %ul.nav.nav-tabs
             -if params[:tenant_id] || @tenant
               %li.active
-                %a{:href => "/nova/", :tabindex => "1"} Project
+                %a{:href => "/page/tenant", :tabindex => "1"} Project
               %li
-                %a{:href => "/syspanel/", :tabindex => "1"} Admin
+                %a{:href => "/page/admin", :tabindex => "1"} Admin
             -else
               %li
-                %a{:href => "/nova/", :tabindex => "1"} Project
+                %a{:href => "/page/tenant", :tabindex => "1"} Project
               %li.active
-                %a{:href => "/syspanel/", :tabindex => "1"} Admin
+                %a{:href => "/page/admin", :tabindex => "1"} Admin
         -if params[:tenant_id] || @tenant
           =current_tenant["name"]
+          =current_tenant["id"]
           =render "sidebar"
         -else
           =render "admin_sidebar"

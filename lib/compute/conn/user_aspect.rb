@@ -38,7 +38,9 @@ module OpenStack
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
           OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["user"])
         end
-
+        def current_auth_user
+          users.select{|c| c[:name]==authuser}[0]
+        end
       end
     end
   end

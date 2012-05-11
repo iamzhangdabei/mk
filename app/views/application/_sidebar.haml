@@ -10,12 +10,9 @@
       %a{:href => "/auth/switch/ad75cae1d548445180414ecb1bd03ee0/"} admin
 %h4 Manage Compute
 %ul.main_nav
+  %li.active
+    =link_to "Volumes","/tenants/#{current_tenant['id']}/volumes",:class=>(controller_name == "volumes" && "active")
   %li
-    %a.active{:href => "/nova/", :tabindex => "1"} Overview
+    =link_to "Volume_snapshots","/tenants/#{current_tenant['id']}/volume_snapshots",:class=>(controller_name == "volume_snapshots" && "active")
   %li
-    =link_to "servers",tenant_servers_path(:tenant_id=>current_tenant["id"])
-    %a{:href => "/nova/instances_and_volumes/", :tabindex => "1"} Instances & Volumes
-  %li
-    %a{:href => "/nova/access_and_security/", :tabindex => "1"} Access & Security
-  %li
-    %a{:href => "/nova/images_and_snapshots/", :tabindex => "1"} Images & Snapshots
+    =link_to "server_snapshots","/tenants/#{current_tenant['id']}/server_snapshots",:class=>(controller_name == "server_snapshots" && "active")

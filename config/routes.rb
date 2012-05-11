@@ -13,6 +13,8 @@ Mk::Application.routes.draw do
     resources :images
     resources :servers
     resources :volumes
+    resources :volume_snapshots
+  resources :server_snapshots
     match "/quotas/edit" => "quotas#edit"
     resources :snapshots
     resources :users
