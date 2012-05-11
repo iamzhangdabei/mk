@@ -33,13 +33,13 @@ module Compute
   require 'compute/conn/tenant_aspect'
   require 'compute/conn/user_aspect'
   require 'compute/conn/volume_aspect'
-
+  require 'compute/exception'
   require 'compute/authentication'
   require 'compute/connection'
   require 'compute/server'
   require 'compute/image'
   require 'compute/flavor'
-  require 'compute/exception'
+  
   require 'compute/address'
   require 'compute/personalities'
 

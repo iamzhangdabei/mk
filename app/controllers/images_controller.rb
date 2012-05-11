@@ -13,7 +13,7 @@ class ImagesController < ApplicationController
   # GET /images/1
   # GET /images/1.json
   def show
-    @image = glance.get_image(params[:id])
+    @image = glance.list_images.select{ |image| image["id"]==params[:id] }[0]
 
     respond_to do |format|
       format.html # show.html.erb

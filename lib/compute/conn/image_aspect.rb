@@ -30,6 +30,12 @@ module OpenStack
         def get_image(id)
           OpenStack::Compute::Image.new(self,id)
         end
+        def get_image_detail(id)
+            response =  req("get","/images/#{id}")
+            OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+            OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["image"])
+     
+        end
         alias :image :get_image
 
       end

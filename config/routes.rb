@@ -1,7 +1,11 @@
 Mk::Application.routes.draw do
-  resources :snapshots
-
-  resources :volumes
+  resources :volume_snapshots
+  resources :server_snapshots
+  resources :volumes do
+    member do
+      post 'attach'
+    end
+  end
 
   match "page/:action" => "page"
   resources :tenants do

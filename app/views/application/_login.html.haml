@@ -15,6 +15,10 @@
         )
       %br
       = password_field_tag 'user_session[password]', nil, :tabindex => 2, :class => 'input'
+     %p
+      %label{:for=>"url"}
+      %br
+      = text_field_tag 'user_session[url]', nil, :tabindex => 2, :class => 'input'
     %p.remember
       = check_box_tag 'user_session[remember_me]', '1', @remember_me
       %label{:for => 'user_session_remember_me'}

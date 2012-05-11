@@ -1,0 +1,13 @@
+= form_tag("/volumes/#{params[:id]}/attach") do
+  =hidden_field_tag "volumeId",params[:id]
+  .field
+    = label_tag :server_id
+    %br/
+    = select_tag "server_id", options_for_select(compute.servers.collect{|server| [ server[:name], server[:id] ]})
+  .field
+    = label_tag :attachment
+    %br/
+    = text_field_tag :attachment ,"/dev/vdc"
+  .actions
+    = submit_tag "submit"
+

@@ -2,7 +2,7 @@ class VolumesController < ApplicationController
   # GET /volumes
   # GET /volumes.json
   def index
-    @volumes = compute.list_volumes(true)
+    @volumes = compute.list_volumes
 
     respond_to do |format|
       format.html # index.html.erb
@@ -35,11 +35,17 @@ class VolumesController < ApplicationController
   def edit
     @volume = compute.get_volume(params[:id].to_i)
   end
-
+def attach
+  compute.create_attachment(params[:server_id],{:volumeId=>params[:volumeId],:device=>params[:attachment]})
+  respond_to do |format|
+    format.html { redirect_to volumes_path, :notice => 'attachment was successfully created.' }
+    format.json { render :json => @volume, :status => :created, :location => @volume }
+  end
+end
   # POST /volumes
   # POST /volumes.json
   def create
-    @volume = compute.co.create_volume({"size"=>params[:size],"display_name"=>params[:name],"display_description"=>params[:description]})
+    @volume = compute.create_volume({"size"=>params[:size],"display_name"=>params[:name],"display_description"=>params[:description]})
 
 
     respond_to do |format|

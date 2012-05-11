@@ -2,6 +2,7 @@ module OpenStack
   module Compute
     module Conn
       module SnapshotAspect
+        
         def snapshots
            response = req("get","/os-snapshots")
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)

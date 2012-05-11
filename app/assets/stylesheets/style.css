@@ -99,7 +99,7 @@ body {
 }
 
 #splash .modal {
-  background: #fff url(../images/logo.png) no-repeat center 35px;
+  background: #fff url(logo.png) no-repeat center 35px;
   width: 390px;
   padding-top: 170px;
   border: 1px solid #e1e1e1;

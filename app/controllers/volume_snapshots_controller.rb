@@ -1,4 +1,4 @@
-class SnapshotsController < ApplicationController
+class VolumeSnapshotsController < ApplicationController
   # GET /snapshots
   # GET /snapshots.json
   def index

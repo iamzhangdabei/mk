@@ -1,0 +1,24 @@
+.row.large-rounded
+  .modal.login
+    .modal-header
+      %h3 Log In
+    %form{:action => "/user_sessions", :method => "POST"}
+      .modal-body.clearfix
+        %fieldset
+          .control-group.form-field.clearfix
+            %label{:for => "id_username"} User Name
+            %span.help-block
+            .input
+              %input#id_username{:maxlength => "20", :name => "username", :type => "text"}
+          .control-group.form-field.clearfix
+            %label{:for => "id_api_key"} Password
+            %span.help-block
+            .input
+              %input#id_password{:maxlength => "20", :name => "api_key", :type => "password"}
+          .control-group.form-field.clearfix
+            %label{:for => "id_url"} url
+            %span.help-block
+            .input
+              %input#id_password{:maxlength => "40", :name => "url", :type => "text"}
+      .modal-footer
+        %input#home_login_btn.btn.btn-primary.pull-right{:type => "submit", :value => "Sign In"}

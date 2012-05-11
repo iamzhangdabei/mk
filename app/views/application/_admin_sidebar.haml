@@ -14,3 +14,9 @@
     =link_to "Users",users_path,:class=>(controller_name == "users" && "active")
   %li
     =link_to "Quotas","/page/quotas",:class=>(action_name == "quotas" && "active")
+  %li
+    =link_to "Volumes",volumes_path,:class=>(controller_name == "volumes" && "active")
+  %li
+    =link_to "Volume_snapshots","/volume_snapshots",:class=>(controller_name == "volume_snapshots" && "active")
+  %li
+    =link_to "server_snapshots","/server_snapshots",:class=>(controller_name == "server_snapshots" && "active")

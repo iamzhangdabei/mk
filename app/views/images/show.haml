@@ -1,10 +1,53 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @image.name %>
-</p>
-
-
-<%= link_to 'Edit', edit_image_path(@image) %> |
-<%= link_to 'Back', images_path %>
+%ul.item_detail.dash_block
+  %li.status.detail_section
+    %h3 Status
+    %ul
+      %li
+        %label> Image ID:
+        =@image[:id]
+      %li
+        %label Image Status:
+        =@image[:status]
+      %li
+        %label Image Name:
+        =@image[:name]
+      %li
+        %label Public:
+        =@image[:is_public]
+      %li
+        %label Checksum:
+        =@image[:checksum]
+      %li
+        %label Created At:
+        =@image[:created_at]
+      %li
+        %label Updated At:
+        =@image[:updated_at]
+  %li.specs.detail_section
+    %h3 Specs
+    %ul
+      %li
+        %label Size:
+        =@image[:size]
+        MB
+      %li
+        %label Container Format:
+        =@image["container_format"]
+      %li
+        %label Disk Format:
+        =@image["disk_format"]
+  %li.custom_properties.detail_section
+    %h3 Custom Properties
+    %ul
+      %li
+        %label Kernel ID:
+        =@image["properties"]["kernel_id"]
+      %li
+        %label Ramdisk ID:
+        =@image["properties"]["ramdisk_id"]
+      %li
+        %label Euca2ools state:
+        =@image["properties"]["image_state"]
+      %li
+        %label Image Type:
+        =@image["properties"]["image_location"]

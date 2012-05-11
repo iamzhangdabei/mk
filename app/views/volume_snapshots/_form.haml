@@ -1,0 +1,15 @@
+= form_tag('/snapshots') do
+  .field
+    = label_tag :display_name
+    %br/
+    = text_field_tag  :display_name
+  .field
+    = label_tag :display_description
+    %br/
+    = text_area_tag :display_description
+  .field
+    = label_tag :volume_id
+    %br/
+    = select_tag "volume_id", options_for_select(compute.list_volumes(true).collect{|volume| [ volume[:displayName], volume[:id] ]})
+  .actions
+    = submit_tag "submit"

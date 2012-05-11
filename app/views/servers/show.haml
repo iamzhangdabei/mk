@@ -1,3 +1,4 @@
+
 .row-fluid
   .span12
     %ul#instance_details.nav.nav-tabs.ajax-tabs
@@ -16,34 +17,39 @@
             %ul
               %li
                 %strong Status:
-                =real_server.status
-                =@server_detail["OS-EXT-STS:task_state"].nil?? "No":server_detail["OS-EXT-STS:task_state"]
+                =@server.status
               %li
-                %strong> Instance Name:
-                \ asdfsadf
+                %strong Instance Name:
+                =@server.name
               %li
                 %strong> Instance ID:
-                \ c9b500d6-1d6c-4e42-bef1-72e2c59252e0
+                =@server_detail[:id]
         .specs.row-fluid
           %h4 Specs
+          -flavor =compute.flavors.select{|c| c["id"]==@server.flavor["id"]}[0]
           %hr.header_rule
             %ul
               %li
                 %strong> RAM:
-                \ 512MB
+                =flavor[:ram] 
+                MB
               %li
                 %strong> VCPUs:
-                \ 1 VCPU
+                =flavor[:vcpus]
+                VCPU
               %li
                 %strong> Disk:
-                \ 0GB
+                =flavor[:disk]
+                GB
         .addresses.row-fluid
           %h4 IP Addresses
           %hr.header_rule
             %ul
-              %li
-                %strong Private:
-                10.0.0.2
+              -@server.addresses.each do |addr|
+                %li
+                  %strong
+                    =addr.label
+                  =addr.address
         .security_groups.row-fluid
           %h4 Security Groups
           %hr.header_rule

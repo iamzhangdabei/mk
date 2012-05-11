@@ -2,6 +2,13 @@ module OpenStack
   module Compute
     module Conn
       module VolumeAspect
+        def create_attachment(server_id,options)
+          data = JSON.generate(:volumeAttachment => options)
+          response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/servers/#{server_id}/os-volume_attachments",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+          volume= JSON.parse(response.body)['volumeAttachment']
+          return volume
+        end
         def list_volumes
           response = req("get","/os-volumes/detail")
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
