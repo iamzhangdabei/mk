@@ -1,4 +1,17 @@
 # -*- coding: utf-8 -*-
-class Role < ActiveRecord::Base
-  has_and_belongs_to_many :users
+class Role 
+  
+  include ActiveModel::Validations
+  include ActiveModel::Conversion
+  extend ActiveModel::Naming
+  
+  def initialize(attributes = {})
+    attributes.each do |name, value|
+      send("#{name}=", value)
+    end
+  end
+  
+  def persisted?
+    false
+  end
 end

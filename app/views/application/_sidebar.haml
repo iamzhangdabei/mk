@@ -10,7 +10,9 @@
       %a{:href => "/auth/switch/ad75cae1d548445180414ecb1bd03ee0/"} admin
 %h4 Manage Compute
 %ul.main_nav
-  %li.active
+  %li
+    =link_to "Servers","/tenants/#{current_tenant['id']}/servers",:class=>(controller_name == "servers" && "active")
+  %li
     =link_to "Volumes","/tenants/#{current_tenant['id']}/volumes",:class=>(controller_name == "volumes" && "active")
   %li
     =link_to "Volume_snapshots","/tenants/#{current_tenant['id']}/volume_snapshots",:class=>(controller_name == "volume_snapshots" && "active")
