@@ -1,5 +1,36 @@
 <p id="notice"><%= notice %></p>
-
-
+<ul id="instance_tabs">
+    <li class="active"><a href="#" class="overview">Overview</a></li>
+</ul>
+<div class="dash_block">
+    <div class="tab_wrapper" id="overview">
+      <ul>
+        <li>
+          <div class="status">
+            <h4>Details</h4>
+            <ul>
+              <li><span>ID:</span> <%=@volume[:id]%></li>
+              <li><span>Name:</span><%=@volume[:displayName]%></li>
+              <li><span>Size:</span> <%=@volume[:size]%></li>
+              <li><span>Description:</span><%=@volume[:displayDescription]%></li>
+              <li><span>Status:</span> <%=@volume[:status]%></li>
+              <li><span>Created:</span> <%=@volume[:createdAt]%></li>
+              <li>
+                <span>Attached To:</span>
+                <%@volume[:attachments].each do |attachment|%>
+                 <a href="/servers/#{attachment[:serverId]}">
+                  Instance <%=attachment[:serverId]%>
+                  (first server)
+                </a>
+                on <%=attachment[:device]%>
+                <%end%>
+                
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 <%= link_to 'Edit', edit_volume_path(:id=>@volume[:id]) %> |
 <%= link_to 'Back', volumes_path %>

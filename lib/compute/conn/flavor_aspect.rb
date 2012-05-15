@@ -2,7 +2,11 @@ module OpenStack
   module Compute
     module Conn
       module FlavorAspect
-
+        def delete_flavor(id)
+           response = req("DELETE","/flavors/#{id}")
+          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+      
+        end
         # Returns an array of hashes listing all available server flavors.  The :id key in the hash can be used when flavorRef is required.
         #
         # You can also provide :limit and :offset parameters to handle pagination.
@@ -32,6 +36,14 @@ module OpenStack
         end
         alias :flavor :get_flavor
         #to be finished
+        #name
+        #ram
+        #vcpus
+        #disk
+        #id
+        #swap
+        #rxtx_facrot
+        #{"vcpus": 1, "disk": 1, "name": "test", "rxtx_factor": 1, "OS-FLV-EXT-DATA:ephemeral": 1, "ram": 512, "id": 6, "swap": 1}}'
         def create_flavor(options)
           data = JSON.generate(:flavor => options)
           response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/flavors",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)

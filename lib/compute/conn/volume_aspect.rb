@@ -2,12 +2,13 @@ module OpenStack
   module Compute
     module Conn
       module VolumeAspect
-        def create_attachment(server_id,options)
-          data = JSON.generate(:volumeAttachment => options)
+        def create_attachment(server_id,volume_id,device)
+          data = JSON.generate(:volumeAttachment => {"device"=>"#{device}", "volumeId"=>"#{volume_id}"})
           response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/servers/#{server_id}/os-volume_attachments",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
-          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
-          volume= JSON.parse(response.body)['volumeAttachment']
-          return volume
+           #p response.body
+          #OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+          #volume= JSON.parse(response.body)['volumeAttachment']
+         # return volume
         end
         def list_volumes
           response = req("get","/os-volumes/detail")
@@ -53,7 +54,15 @@ module OpenStack
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
           OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
         end
-        
+        #{"snapshot": {"display_name": "display_nameeeee", "force": false, "display_description": "descriptionnnnnnn", "volume_id": 2}}'
+
+        def make_snapshot_for_volume(volume_id,options)
+          data = JSON.generate(:volume => options)
+          response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/os-volumes",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+          OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
+       
+        end
       end
     end
   end

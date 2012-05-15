@@ -1,6 +1,7 @@
 class ServersController < ApplicationController
   # GET /servers
   # GET /servers.json
+  #
   def index
     @servers = compute.servers
 
@@ -68,7 +69,13 @@ class ServersController < ApplicationController
       end
     end
   end
-
+  def create_snapshot
+    @server = compute.get_server_detail(params[:id])
+  end
+def make_snapshot
+  @server = compute.get_server(params[:id]).create_image(:name => params[:name])
+   redirect_to server_snapshots_path
+end
   # DELETE /servers/1
   # DELETE /servers/1.json
   def destroy

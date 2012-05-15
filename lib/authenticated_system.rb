@@ -4,42 +4,10 @@ module AuthenticatedSystem
     # Preloads @current_user with the user model if they're logged in.
 
     def logged_in?
-      !!current_user && current_user.id != 0
+      session[:username] && session[:api_key]&& session[:url]
     end
 
-    def current_user_session
-      return @current_user_session if defined?(@current_user_session)
-      @current_user_session = ::UserSession.find
-    end
-
-    # Accesses the current user from the session.
-    # Future calls avoid the database because nil is not equal to false.
-    def current_user
-      return @current_user if defined?(@current_user)
-      @current_user = current_user_session && current_user_session.record
-    end
     
-    # Store the given user id in the session.
-    #def current_user=(new_user)
-    #  session[:user_id] = new_user ? new_user.id : nil
-    #  @current_user = new_user || false
-    #end
-
-    # Check if the user is authorized
-    #
-    # Override this method in your controllers if you want to restrict access
-    # to only a few actions or if you want to check if the user
-    # has the correct rights.
-    #
-    # Example:
-    #
-    #  # only allow nonbobs
-    #  def authorized?
-    #    current_user.login != "bob"
-    #  end
-    def authorized?(role=nil)
-      role.nil? || current_user.has_role?(role)
-    end
 
     # Filter method to enforce a login requirement.
     #
@@ -78,9 +46,9 @@ module AuthenticatedSystem
         # Add any other API formats here.  (Some browsers, notably IE6, send Accept: */* and trigger
         # the 'format.any' block incorrectly. See http://bit.ly/ie6_borken or http://bit.ly/ie6_borken2
         # for a workaround.)
-        format.any(:json, :xml) do
-          request_http_basic_authentication 'Web Password'
-        end
+        #format.any(:json, :xml) do
+        #  request_http_basic_authentication 'Web Password'
+        #end
       end
     end
 

@@ -187,7 +187,7 @@ a.current_item:hover h3, a.current_item:hover h4 {
     border: 1px solid #c0d9e4;
     margin-left: 14px;
     margin-bottom: 15px;
-    background-image: url(../img/drop_arrow.png);
+    background-image: url(drop_arrow.png);
     background-repeat: no-repeat;
     background-position: 170px 20px;
 }
@@ -400,7 +400,7 @@ table form {
 }
 
 .table_search input {
-  background: url(../img/search.png) no-repeat 195px 5px;
+  background: url(search.png) no-repeat 195px 5px;
   display: inline-block;
   margin-bottom: 0;
 }
@@ -441,7 +441,7 @@ table form {
 }
 
 .icon-updating.ajax-updating {
-  background: transparent url(../img/spinner.gif) no-repeat center center;
+  background: transparent url(spinner.gif) no-repeat center center;
   padding: 1px;
 }
 
@@ -804,7 +804,7 @@ tr.terminated {
   font-weight: bold;
   color: #555;
   cursor: pointer;
-  background-image: url(../img/right_droparrow.png);
+  background-image: url(right_droparrow.png);
   background-repeat: no-repeat;
   background-position: 130px center;
 }
@@ -813,7 +813,7 @@ tr.terminated {
   width: 334px;
   margin-bottom: 10px;
   border-bottom: solid 1px #E1E1E1;
-  background-image: url(../img/drop_arrow.png);
+  background-image: url(drop_arrow.png);
 }
 
 form div.clearfix.error {
@@ -847,7 +847,7 @@ form div.clearfix.error {
 }
 
 #region_selector li:first-child p{
-  background: #EDEDED url(../img/drop_arrow.png) no-repeat 106px 9px !important;
+  background: #EDEDED url(drop_arrow.png) no-repeat 106px 9px !important;
   display: block;
   border: 1px solid #e1e1e1;
   padding: 5px;

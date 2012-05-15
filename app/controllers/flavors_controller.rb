@@ -40,7 +40,8 @@ class FlavorsController < ApplicationController
   # POST /flavors
   # POST /flavors.json
   def create
-    @flavor = compute.create_flavor()
+   # {"vcpus": 1, "disk": 1, "name": "test", "rxtx_factor": 1, "OS-FLV-EXT-DATA:ephemeral": 1, "ram": 512, "id": 6, "swap": 1}}'
+    @flavor = compute.create_flavor("rxtx_factor"=>1,"OS-FLV-EXT-DATA:ephemeral"=>params[:ephemeral],:vcpus=>params[:vcpus],:disk=>params[:disk],:name=>params[:name],:ram=>params[:ram],:id=>params[:id],:swap=>params[:swap])
 
     respond_to do |format|
         format.html { redirect_to flavors_path, :notice => 'Flavor was successfully created.' }
@@ -67,11 +68,11 @@ class FlavorsController < ApplicationController
   # DELETE /flavors/1
   # DELETE /flavors/1.json
   def destroy
-    @flavor = Flavor.find(params[:id])
-    @flavor.destroy
+    compute.delete_flavor(params[:id])
+    
 
     respond_to do |format|
-      format.html { redirect_to flavors_url }
+      format.html { redirect_to flavors_path }
       format.json { head :ok }
     end
   end

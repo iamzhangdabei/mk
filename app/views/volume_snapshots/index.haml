@@ -1,20 +1,27 @@
 %h1 Listing snapshots
-%table
-  %tr
-    %th Name
-    %th Description
-    %th Size
-    %th Status
-    %th Volume ID   
-  - @snapshots.each do |snapshot|
-    %tr
-      -#{"id"=>1, "displayDescription"=>"sadf", "displayName"=>"asdf", "createdAt"=>"2012-05-09 01:36:45", "status"=>"available", "size"=>1, "volumeId"=>1} 
-      %td=link_to snapshot[:displayName], volume_snapshot_path(:id=>snapshot[:id])
-      %td=snapshot[:displayDescription]
-      %td=snapshot[:size]
-      %td=snapshot[:status]
-      %td=snapshot[:volumeId]
-      %td=snapshot[:createdAt]
-      %td= link_to 'Destroy', volume_snapshot_path(:id=>snapshot[:id]), :confirm => 'Are you sure?', :method => :delete
-%br/
+.table_wrapper
+  %table#instances.table.table-bordered.table-striped
+    %thead
+      %tr
+        %th.multi_select_column
+        %th Name
+        %th Description
+        %th Size
+        %th Status
+        %th Volume ID
+        %th CreatedAt
+        %th.actions_column Actions
+    %tbody
+      - @snapshots.each do |snapshot|
+        %tr.status_up
+          %td.multi_select_column
+            %input{:name => "object_ids", :type => "checkbox", :value => "c9b500d6-1d6c-4e42-bef1-72e2c59252e0"}/
+          -#{"id"=>1, "displayDescription"=>"sadf", "displayName"=>"asdf", "createdAt"=>"2012-05-09 01:36:45", "status"=>"available", "size"=>1, "volumeId"=>1} 
+          %td=link_to snapshot[:displayName], volume_snapshot_path(:id=>snapshot[:id])
+          %td=snapshot[:displayDescription]
+          %td=snapshot[:size]
+          %td=snapshot[:status]
+          %td=snapshot[:volumeId]
+          %td=snapshot[:createdAt]
+          %td= link_to 'Destroy', volume_snapshot_path(:id=>snapshot[:id]), :confirm => 'Are you sure?', :method => :delete
 -#= link_to 'New Snapshot', new_snapshot_path

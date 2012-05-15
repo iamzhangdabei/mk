@@ -1,0 +1,7 @@
+= form_tag("/servers/#{@server[:id]}/make_snapshot") do
+  .field
+    = label_tag :name
+    %br/
+    = text_field_tag  :name
+  .actions
+    = submit_tag "submit"

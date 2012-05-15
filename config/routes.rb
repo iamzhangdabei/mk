@@ -3,7 +3,7 @@ Mk::Application.routes.draw do
   resources :server_snapshots
   resources :volumes do
     member do
-      post 'attach'
+      get 'attach'
     end
   end
 
@@ -11,7 +11,12 @@ Mk::Application.routes.draw do
   resources :tenants do
     resources :flavors
     resources :images
-    resources :servers
+    resources :servers do
+      member do 
+        get "create_snapshot"
+        post "make_snapshot"
+      end
+    end
     resources :volumes
     resources :volume_snapshots
   resources :server_snapshots
@@ -25,7 +30,12 @@ Mk::Application.routes.draw do
 
   resources :images
 
-  resources :servers
+  resources :servers do
+    member do 
+      get "create_snapshot"
+      post "make_snapshot"
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

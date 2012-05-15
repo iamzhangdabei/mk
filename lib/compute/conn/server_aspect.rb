@@ -7,10 +7,19 @@ module OpenStack
             OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
             OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["servers"])
         end
+
         def get_server_detail(id)
           response = req("get","/servers/#{id}")
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
           OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["server"])
+        end
+
+        def get_console(id)
+          data =JSON.generate("os-getVNCConsole"=>{"type"=>"novnc"})
+          response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/servers/#{id}/action",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+         #p response.body
+          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+          OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["console"])[:url]
         end
         # Returns the OpenStack::Compute::Server object identified by the given id.
         #
@@ -22,6 +31,23 @@ module OpenStack
         def get_server(id)
           OpenStack::Compute::Server.new(self,id)
         end
+        def pause_server(id)
+          data =JSON.generate("pause"=>nil)
+          response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/servers/#{id}/action",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+          #p response.body
+          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+          OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["console"])[:url]
+     
+        end
+        def unpause_server(id)
+          data =JSON.generate("unpause"=>nil)
+          response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/servers/#{id}/action",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+        # p response.body
+          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+          OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["console"])[:url]
+     
+        end
+        
         alias :server :get_server
         
         # Returns an array of hashes, one for each server that exists under this account.  The hash keys are :name and :id.
@@ -108,6 +134,13 @@ module OpenStack
           server.adminPass = server_info['adminPass']
           return server
         end
+#image = server.make_snapshot(:name => "My Rails Server")
+        def make_snapshot(server_id,options)
+          data = JSON.generate(:createImage => options)
+          response = req("POST",svrmgmthost,"#{@svrmgmtpath}/servers/#{server_id}/action",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        end
+
       end
     end
   end

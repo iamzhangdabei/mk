@@ -18,7 +18,9 @@
           %td= volume[:displayDescription]
           %td= volume[:size]
           %td= volume[:status]
-          %td= volume["attachments"][0]["serverId"]
+          %td
+            -volume["attachments"].each do |attachment|
+              =link_to "#{attachment["serverId"]}","/servers/#{attachment["serverId"]}"
           -#%td= link_to "#{volume["attachments"][0][:serverId]}", "servers/"+ volume["attachments"][0]["serverId"]
           %td.actions_column=link_to "delete",volume_path(:id=>volume[:id]), :confirm => 'Are you sure?', :method => :delete
 = link_to 'New Volume', new_volume_path

@@ -44,11 +44,11 @@
                 %span.caret
               %ul.dropdown-menu.row_actions.clearfix
                 %li.clearfix
-                  %a.btn.btn-small{:href => "/nova/instances_and_volumes/instances/c9b500d6-1d6c-4e42-bef1-72e2c59252e0/vnc"} VNC Console
+                  %a.btn.btn-small{:href => "#{compute.get_console(server_detail[:id])}",:target=>"_blank"} VNC Console
                 %li.clearfix
                   %a.btn.btn-small{:href => "/nova/instances_and_volumes/instances/c9b500d6-1d6c-4e42-bef1-72e2c59252e0/console"} View Log
                 %li.clearfix
-                  %a.ajax-modal.btn.btn-small{:href => "/nova/images_and_snapshots/c9b500d6-1d6c-4e42-bef1-72e2c59252e0/create"} Snapshot
+                  =link_to "Snapshot" ,create_snapshot_server_path(:id=>server_detail[:id]),:class=>"ajax-modal btn btn-small"
                 %li.clearfix
                   %button.btn.btn-small{:name => "action", :type => "submit", :value => "instances__pause__c9b500d6-1d6c-4e42-bef1-72e2c59252e0"} Pause Instance
                 %li.clearfix

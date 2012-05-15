@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
   def reload_compute
     if params[:tenant_id]
-      puts current_tenant[:name]
+      
       @compute =  OpenStack::Compute::Connection.new(:username => session[:username], :api_key => session[:api_key], :auth_url => session[:url],:authtenant=>current_tenant["name"])
     end
   end
@@ -33,6 +33,7 @@ class ApplicationController < ActionController::Base
     return @glance if defined?(@glance)
     @glance =  OpenStack::Compute::Connection.new(:username => session[:username], :api_key => session[:api_key], :auth_url => session[:url],:glance=>true) 
   end
-
+  def require_login
+  end
   helper_method :compute,:keystone,:glance,:current_tenant
 end
