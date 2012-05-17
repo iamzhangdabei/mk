@@ -43,26 +43,16 @@
               %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                 %span.caret
               %ul.dropdown-menu.row_actions.clearfix
-                %li.clearfix
-                  %a.btn.btn-small{:href => "#{compute.get_console(server_detail[:id])}",:target=>"_blank"} VNC Console
-                %li.clearfix
-                  %a.btn.btn-small{:href => "/nova/instances_and_volumes/instances/c9b500d6-1d6c-4e42-bef1-72e2c59252e0/console"} View Log
+                -if server_detail["OS-EXT-STS:power_state"]==1
+                  %li.clearfix
+                    %a.btn.btn-small{:href => "#{compute.get_console(server_detail[:id])}",:target=>"_blank"} VNC Console
                 %li.clearfix
                   =link_to "Snapshot" ,create_snapshot_server_path(:id=>server_detail[:id]),:class=>"ajax-modal btn btn-small"
-                %li.clearfix
-                  %button.btn.btn-small{:name => "action", :type => "submit", :value => "instances__pause__c9b500d6-1d6c-4e42-bef1-72e2c59252e0"} Pause Instance
-                %li.clearfix
-                  %button.btn.btn-small{:name => "action", :type => "submit", :value => "instances__suspend__c9b500d6-1d6c-4e42-bef1-72e2c59252e0"} Suspend Instance
-                %li.clearfix
-                  %button.btn.btn-small.btn-danger{:name => "action", :type => "submit", :value => "instances__reboot__c9b500d6-1d6c-4e42-bef1-72e2c59252e0"} Reboot Instance
-                %li.clearfix
-                  %button.btn.btn-small.btn-danger{:name => "action", :type => "submit", :value => "instances__terminate__c9b500d6-1d6c-4e42-bef1-72e2c59252e0"} Terminate Instance
-                %li.clearfix
-                  %a.btn.btn-small.ajax-update.hide{"data-update-interval" => "2500", :href => "/syspanel/instances/?action=update&table=instances&obj_id=c9b500d6-1d6c-4e42-bef1-72e2c59252e0"} Update
           -#%td= link_to 'Edit', edit_server_path(server)
           -#%td=link_to 'Destroy', server, :confirm => 'Are you sure?', :method => :delete
     %tfoot
       %tr
         %td{:colspan => "12"}
-          %span Displaying 1 item
+          %span
+            ="Displaying #{@servers.size} item"
   = link_to 'New Server', new_server_path

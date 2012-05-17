@@ -50,9 +50,9 @@ module OpenStack
         end
         
         def delete_user(user_id)
-          response = req("DELETE","/users/#{user_id}",options)
+          response = req("DELETE","/users/#{user_id}")
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
-          OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["user"])
+          #OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["user"])
         end
         def current_auth_user
           users.select{|c| c[:name]==authuser}[0]

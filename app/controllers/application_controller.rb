@@ -23,8 +23,7 @@ class ApplicationController < ActionController::Base
   end
   def current_tenant
     if params[:tenant_id]
-      tenants =  JSON.parse(keystone.req("get","/tenants").body)["tenants"]
-      tenant = tenants.select{|c| c["id"]==params[:tenant_id]}[0]
+        keystone.current_tenant
     elsif @tenant
       tenant = @tenant
     end

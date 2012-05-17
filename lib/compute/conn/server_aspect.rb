@@ -3,12 +3,12 @@ module OpenStack
     module Conn
       module ServerAspect
         def clone(id)
-         image_id = 
-         flavor_id =
-         server= get_server(id)
-         pause_server(id)
-         make_snapshot(id,:name=>"snapshot og #{id}")
-         create_server(:name=> 'NewServer',:imageRef=> 'http://172.19.0.3/v1.1/images/3',:flavorRef=> )
+        # image_id = 3
+        # flavor_id =3
+        # server= get_server(id)
+        # pause_server(id)
+        # make_snapshot(id,:name=>"snapshot og #{id}")
+        # create_server(:name=> 'NewServer',:imageRef=> 'http://172.19.0.3/v1.1/images/3',:flavorRef=> )
         end
         def get_all_servers_for_all_tenants
             response =  req("get","/servers?all_tenants=true")

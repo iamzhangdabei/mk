@@ -11,17 +11,26 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
-  
+   {"authenticity_token"=>
+    "tet8RxJVJa7TsUuYk/snz/FrPdG/HfWY94DCyLa4doY=",
+     "enabled"=>"yes", 
+     "name"=>"asdf", 
+     "tenantId"=>"2d5145ccf4b34cbbaa5e9a5059123f48", 
+     "commit"=>"submit", "password_confirm"=>"[FILTERED]", 
+     "password"=>"[FILTERED]", "
+     email"=>"asdf",
+      "utf8"=>"✓"}
+
   def create
-    @user = User.new(params[:user])
-    if @user.save
-      flash[:notice] = "Account registered!"
-      redirect_back_or_default :back
-    else
-      render :action => :new
+    if params[:password] == params[:password_confirm] 
+      keystone.create_user(:name=>params[:name],:email=>params[:email],:password=>params[:password],:tenantId=>params[:tenantId],:enabled=>params[:enabled])
     end
+    redirect_to users_path
   end
-  
+  def destroy
+    keystone.delete_user(params[:id])
+    redirect_to users_path
+  end
   def show
     @user = keystone.get_user(params[:id])
   end

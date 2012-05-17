@@ -16,4 +16,4 @@
     %br/
     = select_tag "flavorRef", options_for_select(compute.flavors.collect{|p| [ p[:name]+"#{p[:vcpus]} VCPU / #{p[:disk]} GB Dish / #{p[:ram]} MB Ram", p[:links][0][:href].split("/").last]})
   .actions
-    = submit_tag "submit"
+    = submit_tag "submit",:class=>"btn btn-primary"

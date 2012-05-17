@@ -47,7 +47,10 @@ class ServerSnapshotsController < ApplicationController
         format.json { render :json => @snapshot, :status => :created, :location => @snapshot }
     end
   end
-
+  def pause
+  end
+  def unpause
+  end
   # PUT /snapshots/1
   # PUT /snapshots/1.json
   def update

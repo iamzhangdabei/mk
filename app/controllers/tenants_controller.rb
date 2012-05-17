@@ -27,7 +27,7 @@ end
   # GET /tenants/new
   # GET /tenants/new.json
   def new
-    @tenant = Tenant.new
+   # @tenant = Tenant.new
 
     respond_to do |format|
       format.html # new.html.erb

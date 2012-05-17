@@ -3,6 +3,9 @@ class PageController < ApplicationController
   def quotas
     @quotas = compute.quotas(keystone)
   end
+  def edit_quotas
+    
+  end
   def services
     @services = compute.services_status
   end
