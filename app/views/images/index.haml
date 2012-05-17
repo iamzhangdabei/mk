@@ -3,7 +3,6 @@
   %table#instances.table.table-bordered.table-striped
     %thead
       %tr
-        %th.multi_select_column
         %th Name
         %th Status
         %th Public
@@ -12,8 +11,6 @@
     %tbody
       - @images.each do |image|
         %tr.status_up
-          %td.multi_select_column
-            %input{:name => "object_ids", :type => "checkbox", :value => "c9b500d6-1d6c-4e42-bef1-72e2c59252e0"}/
           %td=link_to  image[:name],image_path(:id=>image[:id])
           %td= image[:status]
           %td= (image[:is_public] == true && "Yes")||"No"

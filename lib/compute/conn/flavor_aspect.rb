@@ -2,6 +2,8 @@ module OpenStack
   module Compute
     module Conn
       module FlavorAspect
+        #delete a flavor
+        #api : DELETE /flavors/#{id}
         def delete_flavor(id)
            response = req("DELETE","/flavors/#{id}")
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
