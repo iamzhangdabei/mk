@@ -1,12 +1,21 @@
 class UsersController < ApplicationController
   before_filter :login_required
   def index
-    @users = keystone.users
+    if params[:tenant_id] 
+       @users = keystone.get_users_for_tenant(params[:tenant_id])
+    else
+          @users = keystone.users
+    end
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => @tenants }
     end
+  end
+  def roles
+  if  (params[:tenant_id] && params[:id])
+   @roles = keystone.get_user_roles_for_tenant(params[:id],params[:tenant_id])
+  end
   end
   def new
     @user = User.new

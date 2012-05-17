@@ -16,7 +16,7 @@ module OpenStack
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
           OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["roles"])       
         end
-        def get_user_role_for_tenant(user_id,tenant_id)
+        def get_user_roles_for_tenant(user_id,tenant_id)
           response = req("get","/tenants/#{tenant_id}/users/#{user_id}/roles")
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
           OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["roles"]) 

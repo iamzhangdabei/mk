@@ -34,15 +34,27 @@ class VolumesController < ApplicationController
 
   # GET /volumes/1/edit
   def edit
-    @volume = compute.get_volume(params[:id].to_i)
+    @volume = compute.get_volume(params[:id])
   end
-def attach
-  compute.create_attachment(params[:server_id],{:volumeId=>params[:volumeId],:device=>params[:attachment]})
-  respond_to do |format|
-    format.html { redirect_to volumes_path, :notice => 'attachment was successfully created.' }
-    format.json { render :json => @volume, :status => :created, :location => @volume }
+
+  def attach
+     compute.create_attachment(params[:server_id],params[:volumeId],params[:attachment]) 
+     respond_to do |format|
+      format.html { redirect_to volumes_path, :notice => 'attachment was successfully created.' }
+      format.json { render :json => @volume, :status => :created, :location => @volume }
+    end
   end
-end
+
+  def create_snapshot
+    @volume = compute.get_volume(params[:id])
+  end
+ #{"snapshot": {"display_name": "display_nameeeee", "force": false, "display_description": "descriptionnnnnnn", "volume_id": 2}}'
+
+  def make_snapshot
+    @server = compute.make_snapshot_for_volume(params[:id],:display_name=>params[:name],:force=>true,:display_description=>params[:description],:volume_id=>params[:id])
+    redirect_to volume_snapshots_path
+  end
+
   # POST /volumes
   # POST /volumes.json
   def create

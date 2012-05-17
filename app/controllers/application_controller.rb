@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
   def reload_compute
     if params[:tenant_id]
-      
+      p current_tenant[:name]
       @compute =  OpenStack::Compute::Connection.new(:username => session[:username], :api_key => session[:api_key], :auth_url => session[:url],:authtenant=>current_tenant["name"])
     end
   end
@@ -23,7 +23,8 @@ class ApplicationController < ActionController::Base
   end
   def current_tenant
     if params[:tenant_id]
-        keystone.current_tenant
+      OpenStack::Compute.symbolize_keys(keystone.tenants.select{|c| c[:name]==keystone.get_tenant(params[:tenant_id])[:name]}[0])
+
     elsif @tenant
       tenant = @tenant
     end

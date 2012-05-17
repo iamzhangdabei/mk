@@ -57,10 +57,20 @@ module OpenStack
         #{"snapshot": {"display_name": "display_nameeeee", "force": false, "display_description": "descriptionnnnnnn", "volume_id": 2}}'
 
         def make_snapshot_for_volume(volume_id,options)
-          data = JSON.generate(:volume => options)
-          response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/os-volumes",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
-          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
-          OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
+          #p options
+           server_id =   get_volume(volume_id)[:attachments][0][:serverId]
+
+          data = JSON.generate(:snapshot => options)
+          #
+          p data
+          response = csreq("POST",svrmgmthost,"/v1/7c1b416fd8c9441a83d25ea239e2ae7a/snapshots",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+         
+          #response = csreq("POST",svrmgmthost,"#{svrmgmtpath.to_s.gsub("v2.0","v1")}/#{server_id}/snapshots",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+         
+        #  response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/snapshots",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+          p response.body
+          #OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+          #OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["volume"])
        
         end
       end

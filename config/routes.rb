@@ -3,7 +3,9 @@ Mk::Application.routes.draw do
   resources :server_snapshots
   resources :volumes do
     member do
-      get 'attach'
+      post 'attach'
+      get "create_snapshot"
+      post "make_snapshot"
     end
   end
 
@@ -23,7 +25,11 @@ Mk::Application.routes.draw do
   resources :server_snapshots
     match "/quotas/edit" => "quotas#edit"
     resources :snapshots
-    resources :users
+    resources :users do
+member do 
+get :roles
+end
+    end
   end
   resources :tenants
 

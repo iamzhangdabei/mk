@@ -15,7 +15,12 @@ module OpenStack
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
           OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["tenants"])
         end
-
+        def get_roles(tenant_id)
+          response = req("GET","/tenants/#{id}")
+          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+          OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["tenant"])
+  
+        end
         def get_tenant(id)
           response = req("GET","/tenants/#{id}")
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
@@ -55,10 +60,19 @@ module OpenStack
        
         end
 
-        def remove_user_to_tenant(user_id,tenant_id,role_id)
-          
-          response =  req("DELETE","/tenants/#{tenant_id}/users/#{user_id}/roles/OS-KSADM/#{role_id}")
+        def remove_user_from_tenant(user_id,tenant_id)
+           response = req("get","/tenants/#{tenant_id}/users/#{user_id}/roles")
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+         roles= OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["roles"]) 
+       
+        # roles = get_user_roles_for_tenant(user_id,tenant_id)
+         p roles.class
+         roles.each do |role|
+          p role
+          p role[:id]
+            req("DELETE","/tenants/#{tenant_id}/users/#{user_id}/roles/OS-KSADM/#{role[:id]}")
+            OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+          end
         end
 
         def current_tenant
