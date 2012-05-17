@@ -1,4 +1,5 @@
 class PageController < ApplicationController
+  before_filter :login_required
   def quotas
     @quotas = compute.quotas(keystone)
   end

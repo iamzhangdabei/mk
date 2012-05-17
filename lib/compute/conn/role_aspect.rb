@@ -8,6 +8,9 @@ module OpenStack
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
           OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["roles"])       
         end
+        def current_user
+          users.select{|c| c[:name]==authuser}[0]
+        end
         def get_user_roles(user_id)
            response = req("get","/users/#{user_id}/roleRefs")
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)

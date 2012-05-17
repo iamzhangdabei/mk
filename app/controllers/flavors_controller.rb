@@ -1,6 +1,7 @@
 class FlavorsController < ApplicationController
   # GET /flavors
   # GET /flavors.json
+  before_filter :login_required
   def index
     @flavors = compute.list_flavors
 

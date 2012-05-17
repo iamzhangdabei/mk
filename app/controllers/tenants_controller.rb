@@ -1,4 +1,5 @@
 class TenantsController < ApplicationController
+  before_filter :login_required
   # GET /tenants
   # GET /tenants.json
   def index
@@ -9,7 +10,9 @@ class TenantsController < ApplicationController
       format.json { render :json => @tenants }
     end
   end
-
+def edit_users
+  
+end
   # GET /tenants/1
   # GET /tenants/1.json
   def show

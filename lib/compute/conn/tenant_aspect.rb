@@ -21,7 +21,7 @@ module OpenStack
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
           OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["tenant"])
         end
-
+#{"tenant": {"enabled": "true", "name": "test_tenant", "description": "test_tenant"}}
         #params={"tenant"=>{"name"=>"","description"=>"",:enabled=>true}}
         def create_tenant(options)
           #raise OpenStack::Compute::Exception::MissingArgument, "Server name, flavorRef, and imageRef, must be supplied" unless (options[:name] && options[:flavorRef] && options[:imageRef])
@@ -31,11 +31,12 @@ module OpenStack
           tenant= JSON.parse(response.body)['tenant']
           return tenant
         end
+#{"tenant": {"description": "test_tenant", "enabled": "true", "id": "621d7ebac2ba41b48902907c35246bd6", "name": "testttt_tenant"}}'
 
-        def update_tenant(tenant_id,options)
+        def update_tenant(options)
           #raise OpenStack::Compute::Exception::MissingArgument, "Server name, flavorRef, and imageRef, must be supplied" unless (options[:name] && options[:flavorRef] && options[:imageRef])
           data = JSON.generate(:tenant => options)
-          response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/tenants/#{tenant_id}",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+          response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/tenants/#{options[:id]}",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
           tenant= JSON.parse(response.body)['tenant']
           return tenant
@@ -46,18 +47,17 @@ module OpenStack
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         end
 
-        def add_user_to_tenant(user_id,tenant_id)
-          options =  {"roleRef"=>{"tenantId"=>tenant_id,"roleId"=>"Member"}}
-          data = JSON.generate(options)
-          response = csreq("post",svrmgmthost,"/users/#{user_id}/roleRefs",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
-          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
-          OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["roleRef"])       
+        def add_user_to_tenant(user_id,tenant_id,role_id)
+
+          response =  req("PUT","/tenants/#{tenant_id}/users/#{user_id}/roles/OS-KSADM/#{role_id}")
+           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+        #  OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["roleRef"])       
        
         end
 
-        def remove_user_to_tenant(user_id,tenant_id)
-          role = get_user_role_for_tenant(user_id,tenant_id)
-          response =  req("DELETE","/tenants/#{tenant_id}/users/#{user_id}/roles/OS-KSADM/#{role[:id]}")
+        def remove_user_to_tenant(user_id,tenant_id,role_id)
+          
+          response =  req("DELETE","/tenants/#{tenant_id}/users/#{user_id}/roles/OS-KSADM/#{role_id}")
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
         end
 

@@ -1,6 +1,7 @@
 class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
+  before_filter :login_required
   def index
     @images = glance.list_images
 

@@ -1,4 +1,5 @@
 class VolumesController < ApplicationController
+  before_filter :login_required
   # GET /volumes
   # GET /volumes.json
   def index

@@ -1,4 +1,5 @@
 class ServerSnapshotsController < ApplicationController
+  before_filter :login_required
 # GET /snapshots
   # GET /snapshots.json
   def index

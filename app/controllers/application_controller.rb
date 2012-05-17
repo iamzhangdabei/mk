@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  include AuthenticatedSystem
   include OpenStack
+  include AuthenticatedSystem
   before_filter :reload_compute
   def compute
     return @compute if defined?(@compute)

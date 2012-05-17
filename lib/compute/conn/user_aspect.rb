@@ -2,7 +2,19 @@ module OpenStack
   module Compute
     module Conn
       module UserAspect
-
+        def create_user(options)
+#{"user": 
+#{"email": "test@qq.com", 
+#  "password": "test", 
+#  "enabled": "true", 
+#  "name": "test",
+#   "tenantId": "admin"}}
+          #raise OpenStack::Compute::Exception::MissingArgument, "Server name, flavorRef, and imageRef, must be supplied" unless (options[:name] && options[:flavorRef] && options[:imageRef])
+          data = JSON.generate(:user => options)
+          response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/users",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+          p response.body
+        end
         def get_users_for_tenant(tenant_id)
           response = req("get","/tenants/#{tenant_id}/users")
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
@@ -27,8 +39,12 @@ module OpenStack
 
         #options should be {"user": {"id": base.getid(user),
         #                     "tenantId": base.getid(tenant)}}
-        def update_user(user_id,options)
-          response = req("POST","/users/#{user_id}",options)
+        #{"user": {"name": "test2", "id": "b56e1b27ba2a4dbcb7b764f659b039d8"}}
+        def update_user(options)
+          data = JSON.generate(:user => options)
+           response = csreq("PUT",svrmgmthost,"#{svrmgmtpath}/users/#{options[:id]}",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
+        
+          #response = req("PUT","/users/#{options[:user_id]}",options)
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
           OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["user"])
         end

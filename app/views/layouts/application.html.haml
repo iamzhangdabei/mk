@@ -24,16 +24,18 @@
             -if params[:tenant_id] || @tenant
               %li.active
                 %a{:href => "/page/tenant", :tabindex => "1"} Project
-              %li
-                %a{:href => "/page/admin", :tabindex => "1"} Admin
+              -if logged_in? && keystone.check_admin_for_user(keystone.current_user[:id])
+                %li
+                  %a{:href => "/page/admin", :tabindex => "1"} Admin
             -else
               %li
                 %a{:href => "/page/tenant", :tabindex => "1"} Project
-              %li.active
-                %a{:href => "/page/admin", :tabindex => "1"} Admin
+              -if logged_in? && keystone.check_admin_for_user(keystone.current_user[:id])
+                %li.active
+                  %a{:href => "/page/admin", :tabindex => "1"} Admin
         -if params[:tenant_id] || @tenant
-          =current_tenant["name"]
-          =current_tenant["id"]
+          -#=current_tenant["name"]
+          -#=current_tenant["id"]
           =render "sidebar"
         -else
           =render "admin_sidebar"
@@ -42,7 +44,7 @@
           #user_info.pull-right
             %span
               Logged in as:
-              -#=compute.authuser 
+              =compute.authuser 
             %a{:href => "/logout/"} Sign Out
           .page-header
             %h2 Overview
