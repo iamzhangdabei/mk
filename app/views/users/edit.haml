@@ -1,0 +1,29 @@
+= form_tag("/users") do
+  .field
+    = label_tag :name
+    %br/
+    = text_field_tag  :name
+  .field
+    = label_tag :email
+    %br/
+    = text_area_tag :email
+  .field
+    = label_tag :password
+    %br/
+    = password_field_tag :password
+  .field
+    = label_tag :password_confirm
+    %br/
+    = password_field_tag :password_confirm
+  .field
+    = label_tag :tenantId
+    %br/
+    = select_tag "tenantId", options_for_select(keystone.tenants.collect{|tenant| [ tenant[:name], tenant[:id] ]})
+  .field
+    = label_tag :enabled
+    %br/
+    =check_box_tag "enabled",true,true
+
+  
+  .actions
+    = submit_tag "submit",:class=>"btn btn-primary"
