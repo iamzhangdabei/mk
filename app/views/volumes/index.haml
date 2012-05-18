@@ -3,7 +3,6 @@
   %table#instances.table.table-bordered.table-striped
     %thead
       %tr
-        %th.multi_select_column
         %th Name
         %th Description
         %th size
@@ -13,7 +12,6 @@
     %tbody
       - @volumes.each do |volume|
         %tr
-          %td.multi_select_column
           %td= volume[:displayName]
           %td= volume[:displayDescription]
           %td= volume[:size]

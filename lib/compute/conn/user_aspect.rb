@@ -2,19 +2,21 @@ module OpenStack
   module Compute
     module Conn
       module UserAspect
+
         def create_user(options)
-#{"user": 
-#{"email": "test@qq.com", 
-#  "password": "test", 
-#  "enabled": "true", 
-#  "name": "test",
-#   "tenantId": "admin"}}
+          #{"user": 
+          #{"email": "test@qq.com", 
+          #  "password": "test", 
+          #  "enabled": "true", 
+          #  "name": "test",
+          #   "tenantId": "admin"}}
           #raise OpenStack::Compute::Exception::MissingArgument, "Server name, flavorRef, and imageRef, must be supplied" unless (options[:name] && options[:flavorRef] && options[:imageRef])
           data = JSON.generate(:user => options)
           response = csreq("POST",svrmgmthost,"#{svrmgmtpath}/users",svrmgmtport,svrmgmtscheme,{'content-type' => 'application/json'},data)
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
           p response.body
         end
+
         def get_users_for_tenant(tenant_id)
           response = req("get","/tenants/#{tenant_id}/users")
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
@@ -22,7 +24,6 @@ module OpenStack
         end
 
         def users(options = {})
-         
           anti_cache_param="cacheid=#{Time.now.to_i}"
           path = OpenStack::Compute.paginate(options).empty? ? "#{svrmgmtpath}/users?#{anti_cache_param}" : "#{svrmgmtpath}/users?#{OpenStack::Compute.paginate(options)}&#{anti_cache_param}"
           response = csreq("GET",svrmgmthost,path,svrmgmtport,svrmgmtscheme)
@@ -54,9 +55,11 @@ module OpenStack
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
           #OpenStack::Compute.symbolize_keys(JSON.parse(response.body)["user"])
         end
+
         def current_auth_user
           users.select{|c| c[:name]==authuser}[0]
         end
+        
       end
     end
   end

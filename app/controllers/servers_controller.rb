@@ -2,7 +2,6 @@ class ServersController < ApplicationController
   before_filter :login_required
   # GET /servers
   # GET /servers.json
-  before_filter :login_required
   def index
     @servers = compute.servers
 

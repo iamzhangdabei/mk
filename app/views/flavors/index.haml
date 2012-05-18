@@ -4,7 +4,6 @@
   %table#instances.table.table-bordered.table-striped
     %thead
       %tr
-        %th.multi_select_column
         %th id
         %th name
         %th vcpus
@@ -15,7 +14,6 @@
     %tbody
       - @flavors.sort{|a,b| a[:id]<=>b[:id]}.each do |flavor|
         %tr
-          %td.multi_select_column
           %td= flavor[:id]
           %td= flavor[:name]
           %td= flavor[:vcpus]

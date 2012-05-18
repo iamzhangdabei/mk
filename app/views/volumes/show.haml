@@ -1,0 +1,39 @@
+%p#notice= notice
+%ul#instance_tabs
+  %li.active
+    %a.overview{:href => "#"} Overview
+.dash_block
+  #overview.tab_wrapper
+    %ul
+      %li
+        .status
+          %h4 Details
+          %ul
+            %li
+              %span ID:
+              = @volume[:id]
+            %li
+              %span Name:
+              = @volume[:displayName]
+            %li
+              %span Size:
+              = @volume[:size]
+            %li
+              %span Description:
+              = @volume[:displayDescription]
+            %li
+              %span Status:
+              = @volume[:status]
+            %li
+              %span Created:
+              = @volume[:createdAt]
+            %li
+              %span Attached To:
+              - @volume[:attachments].each do |attachment|
+                %a{:href => "/servers/\#{attachment[:serverId]}"}
+                  Instance #{attachment[:serverId]}
+                  (first server)
+                on #{attachment[:device]}
+= link_to 'Edit', edit_volume_path(:id=>@volume[:id])
+|
+= link_to 'Back', volumes_path
