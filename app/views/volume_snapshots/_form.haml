@@ -12,4 +12,4 @@
     %br/
     = select_tag "volume_id", options_for_select(compute.list_volumes(true).collect{|volume| [ volume[:displayName], volume[:id] ]})
   .actions
-    = submit_tag "submit"
+    = submit_tag "submit",:class=>"btn btn-primary"

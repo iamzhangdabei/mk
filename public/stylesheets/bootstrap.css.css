@@ -1,0 +1,114 @@
+/*
+Syntax error: Invalid CSS after "    &:": expected pseudoclass or pseudoelement, was " {"
+        on line 73 of /home/shendian/mk/app/assets/stylesheets/bootstrap.css.scss
+
+68:   &[type="search"] {
+69:     -webkit-appearance: textfield;
+70:     -webkit-box-sizing: content-box;
+71:     -moz-box-sizing: content-box;
+72:     box-sizing: content-box;
+73:     &: {
+74:       &:-webkit-search-decoration, &:-webkit-search-cancel-button {
+75:         -webkit-appearance: none; } } } }
+76: 
+77: textarea {
+78:   overflow: auto;
+
+Backtrace:
+/home/shendian/mk/app/assets/stylesheets/bootstrap.css.scss:73
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:929:in `expected'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:875:in `expected'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:857:in `expr!'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:623:in `pseudo'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:509:in `simple_selector_sequence'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:485:in `_selector'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:464:in `selector'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:448:in `selector_sequence'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:373:in `ruleset'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:436:in `declaration_or_ruleset'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:913:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:913:in `rethrow'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:437:in `declaration_or_ruleset'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:399:in `block_child'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:391:in `block_contents'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:380:in `block'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:374:in `ruleset'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:436:in `declaration_or_ruleset'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:913:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:913:in `rethrow'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:437:in `declaration_or_ruleset'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:399:in `block_child'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:391:in `block_contents'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:380:in `block'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:374:in `ruleset'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:398:in `block_child'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:391:in `block_contents'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:59:in `stylesheet'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/scss/parser.rb:28:in `parse'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/engine.rb:327:in `_to_tree'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/engine.rb:300:in `_render'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/engine.rb:248:in `render'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/util.rb:297:in `silence_sass_warnings'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/engine.rb:248:in `render'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/plugin/compiler.rb:339:in `update_stylesheet'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/plugin/compiler.rb:202:in `update_stylesheets'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/plugin/compiler.rb:200:in `each'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/plugin/compiler.rb:200:in `update_stylesheets'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/plugin.rb:81:in `update_stylesheets'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/plugin.rb:54:in `check_for_updates'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/sass-3.1.12/lib/sass/../sass/plugin/rack.rb:51:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/actionpack-3.1.3/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/rack-1.3.6/lib/rack/etag.rb:23:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/rack-1.3.6/lib/rack/conditionalget.rb:25:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/actionpack-3.1.3/lib/action_dispatch/middleware/head.rb:14:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/actionpack-3.1.3/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/actionpack-3.1.3/lib/action_dispatch/middleware/flash.rb:247:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/rack-1.3.6/lib/rack/session/abstract/id.rb:195:in `context'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/rack-1.3.6/lib/rack/session/abstract/id.rb:190:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/actionpack-3.1.3/lib/action_dispatch/middleware/cookies.rb:331:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/activerecord-3.1.3/lib/active_record/query_cache.rb:64:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/activerecord-3.1.3/lib/active_record/connection_adapters/abstract/connection_pool.rb:477:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/actionpack-3.1.3/lib/action_dispatch/middleware/callbacks.rb:29:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/activesupport-3.1.3/lib/active_support/callbacks.rb:392:in `_run_call_callbacks'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/activesupport-3.1.3/lib/active_support/callbacks.rb:81:in `send'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/activesupport-3.1.3/lib/active_support/callbacks.rb:81:in `run_callbacks'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/actionpack-3.1.3/lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/actionpack-3.1.3/lib/action_dispatch/middleware/reloader.rb:68:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/rack-1.3.6/lib/rack/sendfile.rb:101:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/actionpack-3.1.3/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/actionpack-3.1.3/lib/action_dispatch/middleware/show_exceptions.rb:47:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/railties-3.1.3/lib/rails/rack/logger.rb:13:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/rack-1.3.6/lib/rack/methodoverride.rb:24:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/rack-1.3.6/lib/rack/runtime.rb:17:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/rack-1.3.6/lib/rack/lock.rb:15:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/actionpack-3.1.3/lib/action_dispatch/middleware/static.rb:53:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/rack-cache-1.1/lib/rack/cache/context.rb:132:in `forward'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/rack-cache-1.1/lib/rack/cache/context.rb:241:in `fetch'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/rack-cache-1.1/lib/rack/cache/context.rb:181:in `lookup'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/rack-cache-1.1/lib/rack/cache/context.rb:65:in `call!'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/rack-cache-1.1/lib/rack/cache/context.rb:50:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/railties-3.1.3/lib/rails/engine.rb:456:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/rack-1.3.6/lib/rack/content_length.rb:14:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/railties-3.1.3/lib/rails/rack/log_tailer.rb:14:in `call'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/thin-1.3.1/lib/thin/connection.rb:80:in `pre_process'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/thin-1.3.1/lib/thin/connection.rb:78:in `catch'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/thin-1.3.1/lib/thin/connection.rb:78:in `pre_process'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/thin-1.3.1/lib/thin/connection.rb:53:in `process'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/thin-1.3.1/lib/thin/connection.rb:38:in `receive_data'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/eventmachine-0.12.10/lib/eventmachine.rb:256:in `run_machine'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/eventmachine-0.12.10/lib/eventmachine.rb:256:in `run'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/thin-1.3.1/lib/thin/backends/base.rb:61:in `start'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/thin-1.3.1/lib/thin/server.rb:159:in `start'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/rack-1.3.6/lib/rack/handler/thin.rb:13:in `run'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/rack-1.3.6/lib/rack/server.rb:265:in `start'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/railties-3.1.3/lib/rails/commands/server.rb:70:in `start'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/railties-3.1.3/lib/rails/commands.rb:54
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/railties-3.1.3/lib/rails/commands.rb:49:in `tap'
+/home/shendian/.rvm/gems/ruby-1.8.7-p358/gems/railties-3.1.3/lib/rails/commands.rb:49
+script/rails:6:in `require'
+script/rails:6
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: Invalid CSS after \"    &:\": expected pseudoclass or pseudoelement, was \" {\"\A         on line 73 of /home/shendian/mk/app/assets/stylesheets/bootstrap.css.scss\A \A 68:   &[type=\"search\"] {\A 69:     -webkit-appearance: textfield;\A 70:     -webkit-box-sizing: content-box;\A 71:     -moz-box-sizing: content-box;\A 72:     box-sizing: content-box;\A 73:     &: {\A 74:       &:-webkit-search-decoration, &:-webkit-search-cancel-button {\A 75:         -webkit-appearance: none; } } } }\A 76: \A 77: textarea {\A 78:   overflow: auto;"; }

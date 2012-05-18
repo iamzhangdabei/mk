@@ -23,7 +23,6 @@ module Mk
     # config.autoload_paths += %W(#{config.root}/extras)
     config.time_zone = 'Beijing'
     config.i18n.default_locale = :zh
-    config.action_view.javascript_expansions[:defaults] = %w(plugins.js)
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.

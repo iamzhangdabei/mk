@@ -20,5 +20,15 @@
             -volume["attachments"].each do |attachment|
               =link_to "#{attachment["serverId"]}","/servers/#{attachment["serverId"]}"
           -#%td= link_to "#{volume["attachments"][0][:serverId]}", "servers/"+ volume["attachments"][0]["serverId"]
-          %td.actions_column=link_to "delete",volume_path(:id=>volume[:id]), :confirm => 'Are you sure?', :method => :delete
+          %td.actions_column
+            .btn-group
+              %a.ajax-modal.btn.btn-small{:href => ""} actions
+              %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                %span.caret
+              %ul.dropdown-menu.row_actions.clearfix
+                %li.clearfix
+                  =link_to "delete",volume_path(:id=>volume[:id]), :confirm => 'Are you sure?', :method => :delete,:class=>"btn btn-small"
+                %li.clearfix
+                  =link_to "attach",edit_volume_path(:id=>volume[:id]),:class=>"btn btn-small"
+          
 = link_to 'New Volume', new_volume_path

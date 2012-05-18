@@ -15,4 +15,5 @@
           %td= image[:status]
           %td= (image[:is_public] == true && "Yes")||"No"
           %td= image[:container_format]
+          %td= link_to "launch", new_server_path(:imageRef=>image[:id])
 

@@ -8,4 +8,4 @@
     %br/
     = select_tag "serverId", options_from_collection_for_select(compute.servers, "id", "name")
   .actions
-    = f.submit
+    = f.submit,:class=>"btn btn-primary"

@@ -7,6 +7,7 @@
 //= require jquery
 //= require modernizr.min
 //= require jquery_ujs
+//= require jquery.url
 $(function(){
   $("a.dropdown-toggle").click(function(){
     $(this).parent().toggleClass("open");
