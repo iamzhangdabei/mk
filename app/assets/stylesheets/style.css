@@ -94,7 +94,7 @@ body {
 }
 
 #splash .modal {
-  background: #fff url(logo.png) no-repeat center 35px;
+  background: #fff url(new-logo.png) no-repeat center 35px;
   width: 390px;
   padding-top: 170px;
   border: 1px solid #e1e1e1;
@@ -146,7 +146,7 @@ h1.brand {
 }
 
 h1.brand a {
-    background: url("logo.png") top left no-repeat;
+    background: url("new-logo.png") top left no-repeat;
     display: block;
     float: left;
     width: 116px;
@@ -916,4 +916,8 @@ iframe {
   padding: 10px;
   display: block;
   width: 304px;
+}
+#footer{
+  margin: 0 auto;
+  text-align:center;
 }
