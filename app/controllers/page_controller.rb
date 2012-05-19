@@ -11,7 +11,7 @@ class PageController < ApplicationController
   end
   def tenant
     tenant_id = keystone.get_tenants_for_user(keystone.current_auth_user[:id])[0]["id"]
-
+    #@usage = keystone.tenant_usages.select{|c| c[:tenant_id]==tenant_id}
     redirect_to "/tenants/#{tenant_id}/servers"
   end
   def admin

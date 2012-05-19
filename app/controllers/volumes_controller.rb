@@ -51,7 +51,7 @@ class VolumesController < ApplicationController
  #{"snapshot": {"display_name": "display_nameeeee", "force": false, "display_description": "descriptionnnnnnn", "volume_id": 2}}'
 
   def make_snapshot
-    @server = compute.make_snapshot_for_volume(params[:id],:display_name=>params[:name],:force=>true,:display_description=>params[:description],:volume_id=>params[:id])
+    @server = compute.create_snapshot(:display_name=>params[:name],:force=>true,:display_description=>params[:description],:volume_id=>params[:id])
     redirect_to volume_snapshots_path
   end
 

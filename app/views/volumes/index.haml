@@ -30,7 +30,7 @@
                   =link_to "delete",volume_path(:id=>volume[:id]), :confirm => 'Are you sure?', :method => :delete,:class=>"btn btn-small"
                 %li.clearfix
                   =link_to "attach",edit_volume_path(:id=>volume[:id]),:class=>"btn btn-small"
-                  =link_to "create_snapshot",create_snapshot_path(:id=>volume[:id]),:class=>"btn btn-small"
+                  =link_to "create_snapshot",create_snapshot_volume_path(:id=>volume[:id]),:class=>"btn btn-small"
                   
           
 = link_to 'New Volume', new_volume_path

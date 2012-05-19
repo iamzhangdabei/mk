@@ -9,10 +9,9 @@ module OpenStack
           OpenStack::Compute.symbolize_keys(JSON.parse(response.body))["snapshots"]
         end
         def get_snapshot(id)
-              response = req("get","/os-snapshots/#{id}")
+          response = req("get","/os-snapshots/#{id}")
           OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
           OpenStack::Compute.symbolize_keys(JSON.parse(response.body))["snapshot"]
-     
         end
         def delete_snapshot(id)
           response = req("DELETE","/os-snapshots/#{id}")

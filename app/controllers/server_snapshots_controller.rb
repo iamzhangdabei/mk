@@ -14,7 +14,7 @@ class ServerSnapshotsController < ApplicationController
   # GET /snapshots/1
   # GET /snapshots/1.json
   def show
-    @snapshot = compute.get_snapshot(params[:id])
+    @snapshot = compute.get_image(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,7 +35,7 @@ class ServerSnapshotsController < ApplicationController
 
   # GET /snapshots/1/edit
   def edit
-    @snapshot = compute.get_snapshot(params[:id])
+    @snapshot = compute.get_image(params[:id])
   end
 
   # POST /snapshots
@@ -43,13 +43,9 @@ class ServerSnapshotsController < ApplicationController
   def create
     compute.create_snapshot({"volume_id"=>params[:volume_id],"force"=>false,"display_name"=>params["display_name"],"display_description"=>params["display_description"]})
     respond_to do |format|
-        format.html { redirect_to snapshots_url, :notice => 'Snapshot was successfully created.' }
+        format.html { redirect_to server_snapshots_url, :notice => 'Snapshot was successfully created.' }
         format.json { render :json => @snapshot, :status => :created, :location => @snapshot }
     end
-  end
-  def pause
-  end
-  def unpause
   end
   # PUT /snapshots/1
   # PUT /snapshots/1.json
@@ -70,10 +66,10 @@ class ServerSnapshotsController < ApplicationController
   # DELETE /snapshots/1
   # DELETE /snapshots/1.json
   def destroy
-     compute.delete_snapshot(params[:id])
+     compute.delete_image(params[:id])
 
     respond_to do |format|
-      format.html { redirect_to snapshots_url }
+      format.html { redirect_to server_snapshots_url }
       format.json { head :ok }
     end
   end

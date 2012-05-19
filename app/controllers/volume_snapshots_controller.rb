@@ -41,9 +41,9 @@ class VolumeSnapshotsController < ApplicationController
   # POST /snapshots
   # POST /snapshots.json
   def create
-    compute.create_snapshot({"volume_id"=>params[:volume_id],"force"=>false,"display_name"=>params["display_name"],"display_description"=>params["display_description"]})
+    compute.create_snapshot(:volume_id=>params[:volume_id],:force=>true,:display_name=>params["display_name"],:display_description=>params["display_description"])
     respond_to do |format|
-        format.html { redirect_to snapshots_url, :notice => 'Snapshot was successfully created.' }
+        format.html { redirect_to volume_snapshots_url, :notice => 'Snapshot was successfully created.' }
         format.json { render :json => @snapshot, :status => :created, :location => @snapshot }
     end
   end
@@ -70,7 +70,7 @@ class VolumeSnapshotsController < ApplicationController
      compute.delete_snapshot(params[:id])
 
     respond_to do |format|
-      format.html { redirect_to snapshots_url }
+      format.html { redirect_to volume_snapshots_path }
       format.json { head :ok }
     end
   end

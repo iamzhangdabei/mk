@@ -1,1 +1,11 @@
-te
+.table_wrapper
+  %table#instances.table.table-bordered.table-striped
+    %thead
+      %tr
+        %th Key
+        %th Value
+    %tbody
+      - @usage.each_pair do |key,value|
+        %tr
+          %td= "#{key}"
+          %td= "#{value}"

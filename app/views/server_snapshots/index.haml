@@ -1,4 +1,4 @@
-%h1 Listing snapshots
+%h1 Listing Server snapshots
 .table_wrapper
   %table#instances.table.table-bordered.table-striped
     %thead
@@ -9,10 +9,11 @@
         %th Container Format
         %th.actions_column Actions
     %tbody
-      - @snapshots.each do |image|
+      -  @snapshots.each do |image|
         %tr.status_up
-          %td= image[:name]
+          %td=link_to  image[:name],image_path(:id=>image[:id])
           %td= image[:status]
           %td= (image[:is_public] == true && "Yes")||"No"
           %td= image[:container_format]
+          %td= link_to "launch", new_server_path(:imageRef=>image[:id]),:class=>"btn btn-small btn-danger"
 
