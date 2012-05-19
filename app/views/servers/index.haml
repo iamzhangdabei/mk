@@ -1,4 +1,4 @@
-
+%h1 listing servers
 .table_wrapper
   %table#instances.table.table-bordered.table-striped
     %thead
@@ -17,20 +17,19 @@
     %tbody
       - @servers.each do |server|
         %tr.status_up
-          %td.multi_select_column
           -real_server = compute.get_server(server[:id])
           -server_detail = compute.get_server_detail(server[:id])
+          -flavor =compute.flavors.select{|c| c["id"]==real_server.flavor["id"]}[0]
           %td
-            = server_detail[:tenant_id]
+            = server_detail["tenant_id"]
             (
-            -#= keystone.get_tenant(server_detail[:tenant_id])[:name]
+            = keystone.get_tenant(server_detail["tenant_id"])[:name]
             )
           %td= server_detail[:user_id]
           %td= server_detail[:id]+"(#{server_detail['OS-EXT-SRV-ATTR:instance_name']})"
           %td= server_detail["OS-EXT-SRV-ATTR:host"]
           %td= link_to real_server.name, server_path(:id=>real_server.id)
           %td= real_server.addresses[0].try(:address)
-          -flavor =compute.flavors.select{|c| c["id"]==real_server.flavor["id"]}[0]
           %td= flavor[:name]+"#{flavor[:vcpus]} VCPU / #{flavor[:disk]} GB Dish / #{flavor[:ram]} MB Ram"
           %td= real_server.status
           %td=server_detail["OS-EXT-STS:task_state"].nil?? "No":server_detail["OS-EXT-STS:task_state"]
@@ -41,13 +40,13 @@
               %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                 %span.caret
               %ul.dropdown-menu.row_actions.clearfix
+                %li.clearfix
+                  =link_to "edit",edit_server_path(:id=>server[:id]),:class=>"btn btn-small"
                 -if server_detail["OS-EXT-STS:power_state"]==1
                   %li.clearfix
-                    %a.btn.btn-small{:href => "#{compute.get_console(server_detail[:id])}",:target=>"_blank"} VNC Console
+                    %a.btn.btn-small{:href => "#{compute.get_console(server_detail[:id]) }",:target=>"_blank"} VNC Console
                 %li.clearfix
                   =link_to "Snapshot" ,create_snapshot_server_path(:id=>server_detail[:id]),:class=>"ajax-modal btn btn-small"
-          -#%td= link_to 'Edit', edit_server_path(server)
-          -#%td=link_to 'Destroy', server, :confirm => 'Are you sure?', :method => :delete
     %tfoot
       %tr
         %td{:colspan => "12"}

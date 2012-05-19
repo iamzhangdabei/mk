@@ -1,5 +1,11 @@
 %h1 Editing server
-= render 'form'
+= form_tag("/servers/#{@server[:id]}",:method=>"PUT") do
+  .field
+    = label_tag :name
+    %br/
+    = text_field_tag  :name,@server[:name]
+  .actions
+    = submit_tag "update",:class=>"btn btn-primary"
 = link_to 'Show', @server
 |
 \#{link_to 'Back', servers_path}

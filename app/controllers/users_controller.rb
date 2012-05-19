@@ -32,7 +32,7 @@ class UsersController < ApplicationController
 
   def create
     if params[:password] == params[:password_confirm] 
-      keystone.create_user(:name=>params[:name],:email=>params[:email],:password=>params[:password],:tenantId=>params[:tenantId],:enabled=>params[:enabled])
+      keystone.create_user(:name=>params[:name],:email=>params[:email],:password=>params[:password],:tenantId=>params[:tenantId],:enabled=>true)
     end
     redirect_to users_path
   end
@@ -45,17 +45,12 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = @current_user
+    @user = keystone.get_user(params[:id])
   end
   
   def update
-    @user = @current_user # makes our views "cleaner" and more consistent
-    if @user.update_attributes(params[:user])
-      flash[:notice] = "Account updated!"
-      redirect_to account_url
-    else
-      render :action => :edit
-    end
+     keystone.update_user(:id=>params[:id],:name=>params[:name],:email=>params[:email],:password=>params[:password],:tenantId=>params[:tenantId],:enabled=>true)
+     redirect_to users_path
   end
   def check
     if params[:check_name] == "login"

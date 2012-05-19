@@ -35,7 +35,7 @@ class ServersController < ApplicationController
 
   # GET /servers/1/edit
   def edit
-    @server = compute.get_server(params[:id])
+    @server = compute.get_server_detail(params[:id])
   end
 
   # POST /servers
@@ -58,15 +58,10 @@ class ServersController < ApplicationController
   # PUT /servers/1
   # PUT /servers/1.json
   def update
-    @server = compute.get_server(params[:id]).update(params[:server])
+    @server = compute.get_server(params[:id]).update(:name=>params[:name])
     respond_to do |format|
-      if @server.update_attributes(params[:server])
-        format.html { redirect_to @server, :notice => 'Server was successfully updated.' }
+        format.html { redirect_to servers_path, :notice => 'Server was successfully updated.' }
         format.json { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.json { render :json => @server.errors, :status => :unprocessable_entity }
-      end
     end
   end
   def create_snapshot

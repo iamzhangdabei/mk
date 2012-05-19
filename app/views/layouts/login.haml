@@ -10,14 +10,7 @@
         超管平台
       = stylesheet_link_tag "bootstrap.css", :media =>"screen"
       = stylesheet_link_tag "style.css", :media =>"screen"
-      -#= stylesheet_link_tag "admin.css", :media =>"screen"
-      = stylesheet_link_tag "/stylesheets/jquery.autocomplete.css", :media =>"screen"
       = javascript_include_tag "application"
       = csrf_meta_tags
   %body{ :lang => 'en', :class => [body_class_names, 'two-col'],:id=>"splash" }
     =yield
-
-    = javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js'
-    = javascript_include_tag "/javascripts/admin"
-    = javascript_include_tag 'plugins'
-

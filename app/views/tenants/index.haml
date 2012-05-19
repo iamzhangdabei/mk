@@ -7,7 +7,7 @@
         %th Name
         %th Desciription
         %th Enabled
-        %th actions_column
+        %th.actions_column Actions
     %tbody
       - @tenants.each do |tenant|
         %tr.status_up
@@ -17,4 +17,12 @@
           %td=tenant[:enabled]
           %td.actions_column
             .btn-group
-              =link_to 'Destroy', tenant_path(:id=>tenant[:id]), :confirm => 'Are you sure?', :method => :delete 
+              %a.ajax-modal.btn.btn-small{:href => ""} actions
+              %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                %span.caret
+              %ul.dropdown-menu.row_actions.clearfix
+                %li.clearfix
+                  =link_to "edit",edit_tenant_path(:id=>tenant[:id]),:class=>"btn btn-small"
+                %li.clearfix
+                  =link_to "delete",tenant_path(:id=>tenant[:id]), :confirm => 'Are you sure?', :method => :delete,:class=>"btn btn-small"
+=link_to "new tenant",new_tenant_path

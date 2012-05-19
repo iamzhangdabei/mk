@@ -7,7 +7,7 @@
         %th Name
         %th Email
         %th Enabled
-        %th actions_column
+        %th.actions_column Actions
     %tbody
       - @users.each do |user|
         %tr.status_up
@@ -17,5 +17,12 @@
           %td=user[:enabled]
           %td.actions_column
             .btn-group
-              =link_to 'Destroy', user_path(:id=>user[:id]), :confirm => 'Are you sure?', :method => :delete 
-              
+              %a.ajax-modal.btn.btn-small{:href => ""} actions
+              %a.btn.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                %span.caret
+              %ul.dropdown-menu.row_actions.clearfix
+                %li.clearfix
+                  =link_to "edit",edit_user_path(:id=>user[:id]),:class=>"btn btn-small"
+                %li.clearfix
+                  =link_to "delete",user_path(:id=>user[:id]), :confirm => 'Are you sure?', :method => :delete,:class=>"btn btn-small"
+=link_to "create new user",new_user_path             

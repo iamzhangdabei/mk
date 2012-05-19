@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
   def keystone
     return @keystone if defined?(@keystone)
-    @compute = OpenStack::Compute::Connection.new(:username => session[:username], :api_key => session[:api_key], :auth_url => session[:url],:keystone=>true) 
+    @keystone = OpenStack::Compute::Connection.new(:username => session[:username], :api_key => session[:api_key], :auth_url => session[:url],:keystone=>true) 
 #puts cs
 #p  JSON.parse(cs.req("get","/users").body)
 #p  JSON.parse(cs.req("post","/users",{"user"=>{"id"=>}}).body)

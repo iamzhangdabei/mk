@@ -1,5 +1,19 @@
 %h1 Editing tenant
-= render 'form'
+= form_tag("/tenants/#{@tenant[:id]}",:method=>"PUT") do
+  .field
+    = label_tag :name
+    %br/
+    = text_field_tag  :name,@tenant[:name]
+  .field
+    = label_tag :description
+    %br/
+    = text_area_tag :description,@tenant[:description]
+  -#.field
+    = label_tag :enabled
+    %br/
+    =check_box_tag "enabled",true,@tenant[:enabled]
+  .actions
+    = submit_tag "update",:class=>"btn btn-primary"
 = link_to 'Show', @tenant
 |
 = link_to 'Back', tenants_path

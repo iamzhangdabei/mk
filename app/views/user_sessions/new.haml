@@ -16,6 +16,11 @@
             .input
               %input#id_password{:maxlength => "20", :name => "api_key", :type => "password"}
           .control-group.form-field.clearfix
+            %label{:for => "id_tenantname"} Tenant Name
+            %span.help-block
+            .input
+              %input#id_username{:maxlength => "20", :name => "tenant", :type => "text"}
+          .control-group.form-field.clearfix
             %label{:for => "id_url"} url
             %span.help-block
             .input

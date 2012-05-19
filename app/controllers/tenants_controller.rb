@@ -43,9 +43,7 @@ end
   # POST /tenants
   # POST /tenants.json
   def create
-    @tenant = keystone.create_tenant({"name"=>params[:name],"description"=>params[:description],:enabled=>true})
-
-
+    @tenant = keystone.create_tenant({:name=>params[:name],:description=>params[:description],:enabled=>params[:enabled]})
     respond_to do |format|
      
         format.html { redirect_to @tenant, :notice => 'Tenant was successfully created.' }
@@ -57,16 +55,10 @@ end
   # PUT /tenants/1
   # PUT /tenants/1.json
   def update
-    @tenant = Tenant.find(params[:id])
-
+    keystone.update_tenant({:id=>params[:id],:name=>params[:name],:description=>params[:description],:enabled=>params[:enabled]})
     respond_to do |format|
-      if @tenant.update_attributes(params[:tenant])
-        format.html { redirect_to @tenant, :notice => 'Tenant was successfully updated.' }
+        format.html { redirect_to tenants_path, :notice => 'Tenant was successfully updated.' }
         format.json { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.json { render :json => @tenant.errors, :status => :unprocessable_entity }
-      end
     end
   end
 

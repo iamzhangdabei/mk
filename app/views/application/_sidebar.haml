@@ -1,13 +1,14 @@
 #tenant_switcher.dropdown.switcher_bar{:tabindex => "1"}
   %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#tenant_switcher"}
     %h4 Project
-    %h3 admin
+    %h3 
+      =current_tenant["name"]
   %ul#tenant_list.dropdown-menu
     %li.divider
-    %li
-      %a{:href => "/auth/switch/a761403befdb47faa83ffecdbfb4cc3e/"} demo
-    %li
-      %a{:href => "/auth/switch/ad75cae1d548445180414ecb1bd03ee0/"} admin
+    - keystone.get_tenants_for_user(keystone.current_auth_user[:id]).each do |c|
+      %li
+        %a{:href => "/tenants/#{c['id']}/servers"}
+          =c["name"]
 %h4 Manage Compute
 %ul.main_nav
   %li
