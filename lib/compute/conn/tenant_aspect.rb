@@ -78,6 +78,30 @@ module OpenStack
         def current_tenant
           tenants.select{|c| c[:name]==authuser}[0]
         end
+        def tenant_usages
+          response = req("get","/os-simple-tenant-usage")
+          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+          OpenStack::Compute.symbolize_keys(JSON.parse(response.body))["tenant_usages"]
+        end
+        #quota_set 
+        #  tenant_id
+        #  metadata_items
+        #  injected_file_content_bytes
+        #  volumes 
+        #  gigabytes
+        #  ram 
+        #  floating_ips
+        #  instances
+        #  injected_files
+        #  cores
+        #def upate_quota()
+  #
+        #end
+        def quotas(keystone)
+          response = req("get","/os-quota-sets/#{keystone.current_tenant[:id]}")
+          OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
+          OpenStack::Compute.symbolize_keys(JSON.parse(response.body))
+        end
       end
     end
   end

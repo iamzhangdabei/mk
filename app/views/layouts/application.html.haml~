@@ -52,6 +52,6 @@
     / container
     #footer
       %span
-        ©2007-2010
+        ©2012 东南大学
     = yield :javascripts
 

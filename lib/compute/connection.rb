@@ -132,30 +132,7 @@ module OpenStack
         end
         return res
       end
-      def tenant_usages
-        response = req("get","/os-simple-tenant-usage")
-        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
-        OpenStack::Compute.symbolize_keys(JSON.parse(response.body))["tenant_usages"]
-      end
-      #quota_set 
-      #  tenant_id
-      #  metadata_items
-      #  injected_file_content_bytes
-      #  volumes 
-      #  gigabytes
-      #  ram 
-      #  floating_ips
-      #  instances
-      #  injected_files
-      #  cores
-      #def upate_quota()
-#
-      #end
-      def quotas(keystone)
-        response = req("get","/os-quota-sets/#{keystone.current_tenant[:id]}")
-        OpenStack::Compute::Exception.raise_exception(response) unless response.code.match(/^20.$/)
-        OpenStack::Compute.symbolize_keys(JSON.parse(response.body))
-      end
+
       # Returns the current state of the programatic API limits.  Each account has certain limits on the number of resources
       # allowed in the account, and a rate of API operations.
       #
