@@ -7,7 +7,7 @@
         = yield :title
         = @title_name
         |
-        东南大学计算机学院-云计算管理平台
+        超管平台
       = stylesheet_link_tag "bootstrap.css", :media =>"screen"
       = stylesheet_link_tag "style.css", :media =>"screen"
       = javascript_include_tag "application"

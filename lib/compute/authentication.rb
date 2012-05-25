@@ -45,8 +45,10 @@ module Compute
       end
 
       response = server.post(connection.auth_path.chomp("/")+"/tokens", auth_data, {'Content-Type' => 'application/json'})
+
       if (response.code =~ /^20./)
         resp_data=JSON.parse(response.body)
+        p resp_data
         connection.authtoken = resp_data['access']['token']['id']
         #p resp_data['access']['serviceCatalog']
         connection.services_status = resp_data['access']['serviceCatalog']
